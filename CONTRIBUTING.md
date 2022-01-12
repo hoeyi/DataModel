@@ -1,4 +1,4 @@
-# Contributing to [PROJECT NAME HERE] #
+# Contributing to `Expressions` #
 
 * [Commit Message Guidelines](#commit-message-guidelines)
 * [Object Naming Conventions](#object-naming-conventions)
