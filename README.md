@@ -1,4 +1,4 @@
-# PROJECT NAME HERE #
-*Brief description of the project.*
+# Ichosoft.Expressions #
+A .NET library for building expressions dynamically. 
 
 [Contributing Guidelines](CONTRIBUTING.md)
