@@ -4,10 +4,9 @@ using System.Resources;
 using System.Reflection;
 using System.Linq.Expressions;
 using System.Collections.Generic;
-using System.Globalization;
-using Ichosoft.Model.Annotations;
+using Ichosoft.Expressions.Annotations;
 using Ichosoft.Expressions.Resources;
-using System.Threading;
+using System.ComponentModel.DataAnnotations;
 
 namespace Ichosoft.Expressions
 {
@@ -103,50 +102,61 @@ namespace Ichosoft.Expressions
                 throw new ParseException(message: ExceptionString.Expression_General, e);
             }
         }
-
-        public IEnumerable<ModelMemberMetadata> GetSearchableMemberMetadata<T>()
-            where T : class, new()
+        
+        public IList<ISearchableMemberMetadata> GetSearchableMembers<T>()
         {
-            var type = typeof(T);
+            // Local method for getting the searchable members of a given type.
+            static IEnumerable<PropertyInfo> getSearchableMembers(Type type)
+            {
+                return type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                        .Where(p => p.GetCustomAttribute<SearchableAttribute>() is not null);
+            }
 
-            var searchMembers = GetSearchableMembers(type).Select(s => new ModelMemberMetadata(
-                declaringMemberName: $"{type.Name}.{s.Name}",
-                qualifiedMemberName: $"{s.Name}",
-                displayName: $"{type.Name}.{s.Name}", //"ResourceHelper.GetModelDisplayName(type, s.Name),
-                description: $"{type.Name}.{s.Name}", //ResourceHelper.GetModelDescription(type, s.Name),
-                displayOrder: default));
+            var baseType = typeof(T);
 
-            var nestedSearchMembers = (from p in type.GetProperties()
-                                       select p)
-                                        .SelectMany(p => GetSearchableMembers(p.PropertyType)
-                                            .Select(s => new ModelMemberMetadata(
-                                                declaringMemberName: $"{s.DeclaringType.Name}.{s.Name}",
-                                                qualifiedMemberName: $"{p.Name}.{s.Name}",
-                                                displayName: $"{s.DeclaringType.Name}.{s.Name}", //ResourceHelper.GetModelDisplayName(s.DeclaringType, s.Name),
-                                                description: $"{s.DeclaringType.Name}.{s.Name}", //$"{s.}"ResourceHelper.GetModelDescription(s.DeclaringType, s.Name),
-                                                displayOrder: default)));
+            // Get the searchable members for the base type.
+            var baseSearchableMembers = getSearchableMembers(baseType)
+                                    .Select(p =>
+                                    {
+                                        var display = p.GetCustomAttribute<DisplayAttribute>();
+                                        return new SearchableMemberMetadata()
+                                        {
+                                            Display = display,
+                                            QualifiedMemberName = p.Name
+                                        };
+                                    });
 
-            return searchMembers.Concat(nestedSearchMembers).ToArray();
+            // Get the searchable members for members of object properties
+            // contained in the base type.
+            var nestedPropertyQuery = baseType.GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                                            .Select(p => (p.Name, getSearchableMembers(p.PropertyType)));
+
+
+            var nestedSearchableMembers = (from p in nestedPropertyQuery
+                                           from q in p.Item2
+                                           select new
+                                           {
+                                               BasePropertyName = p.Name,
+                                               SearchableProperty = q
+                                           })
+                                           .Select(p =>
+                                           {
+                                               var display = p.SearchableProperty.GetCustomAttribute<DisplayAttribute>();
+                                               return new SearchableMemberMetadata()
+                                               {
+                                                   Display = display,
+                                                   QualifiedMemberName = $"{p.BasePropertyName}.{p.SearchableProperty.Name}"
+                                               };
+                                           });
+
+            return baseSearchableMembers.Concat(nestedSearchableMembers)
+                    .Where(p => p.Display is not null).Cast<ISearchableMemberMetadata>().ToList();
         }
     }
     #endregion
 
     public partial class ExpressionBuilder
     {
-        /// <summary>
-        /// Returns the names of the searchable members for the given type.
-        /// </summary>
-        /// <param name="type">The <see cref="Type"/> decorated with <see cref="SearchableAttribute"/>.</param>
-        /// <returns>An enumerable collection of strings, one for each member name.</returns>
-        private static IEnumerable<PropertyInfo> GetSearchableMembers(Type type)
-        {
-            var searchMembers = (from s in type.GetCustomAttribute<SearchableAttribute>()?.SearchableMembers ?? Array.Empty<string>()
-                                 join p in type.GetProperties() on s equals p.Name
-                                 select p);
-
-            return searchMembers.ToArray();
-        }
-
         /// <summary>
         /// Creates a constant (RHS) expression given a string and expected type.
         /// </summary>
@@ -244,43 +254,4 @@ namespace Ichosoft.Expressions
             }
         }
     }
-
-    #region Type-string converters
-    public partial class ExpressionBuilder
-    {
-        /// <summary>
-        /// Parses the given string into a <see cref="DateTime?"/> value, using culture-specific
-        /// date formats./>.
-        /// </summary>
-        /// <param name="s"></param>
-        /// <returns>A <see cref="DateTime"/> value if parsed successfully, else null.</returns>
-        private static DateTime? TryParseDateTime(string s)
-        {
-            // Specify the list of culture and misc. supported formats.
-            var dateFormats =
-                new string[]
-                {
-                    CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern,
-                    "MM/dd/yyyy",
-                    "MMddyyyy",
-                    "yyyyMMdd"
-                };
-
-            // Check each format and break the loop when the first result is found.
-            foreach (var format in dateFormats)
-            {
-                if (DateTime.TryParseExact(
-                    s: s,
-                    format: format,
-                    provider: CultureInfo.CurrentUICulture,
-                    style: DateTimeStyles.None,
-                    out DateTime result))
-
-                    return result;
-            }
-
-            return null;
-        }
-    }
-    #endregion
 }

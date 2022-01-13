@@ -1,22 +1,12 @@
 ﻿using System;
 
-namespace Ichosoft.Model.Annotations
+namespace Ichosoft.Expressions.Annotations
 {
     /// <summary>
-    /// Indicates a class has searchable properties.
+    /// Allows for flagging properties as searchable using dynamic expression builders.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     public class SearchableAttribute : Attribute
     {
-        private readonly string[] searchableMembers;
-        public SearchableAttribute(params string[] memberNames)
-        {
-            searchableMembers = memberNames ?? Array.Empty<string>();
-        }
-
-        public string[] SearchableMembers
-        {
-            get{ return searchableMembers; }
-        }
     }
 }

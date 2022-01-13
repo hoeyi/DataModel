@@ -12,6 +12,7 @@ namespace Ichosoft.Expressions
         /// The type of object being searched.
         /// </summary>
         Type SearchObjectType { get; }
+
         /// <summary>
         /// The name of the member to which the search value is compared.
         /// </summary>

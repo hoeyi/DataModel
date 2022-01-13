@@ -34,8 +34,7 @@ namespace Ichosoft.Expressions
         /// of type <typeparamref name="T"/>.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public IEnumerable<ModelMemberMetadata> GetSearchableMemberMetadata<T>()
-            where T : class, new();
+        /// <returns>A collection of <see cref="ISearchableMemberMetadata"/>.</returns>
+        IList<ISearchableMemberMetadata> GetSearchableMembers<T>();
     }
 }
