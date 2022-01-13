@@ -1,4 +1,3 @@
-using System.Resources;
 using System.Reflection;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -28,7 +27,6 @@ namespace Ichosoft.Expressions.UnitTest
             var displayField = typeof(TestClass_WithMetadata).GetProperty(nameof(TestClass_WithMetadata.TestProperty))
                 .GetCustomAttribute<DisplayField>();
 
-            var attrs = typeof(TestClass_WithMetadata).GetProperty(nameof(TestClass_WithMetadata.TestProperty)).GetCustomAttributes();
             string observed = displayField?.Text;
             string expected = TestStrings.TestClass_WithMetadata_TestProperty;
 
