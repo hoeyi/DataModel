@@ -3,8 +3,7 @@ using System.Globalization;
 
 namespace Ichosoft.Expressions
 {
-    #region Type-string converters
-    public partial class ExpressionBuilder
+    static class Converter
     {
         /// <summary>
         /// Parses the given string into a <see cref="DateTime?"/> value, using culture-specific
@@ -12,7 +11,7 @@ namespace Ichosoft.Expressions
         /// </summary>
         /// <param name="s"></param>
         /// <returns>A <see cref="DateTime"/> value if parsed successfully, else null.</returns>
-        private static DateTime? TryParseDateTime(string s)
+        public static DateTime? TryParseDateTime(string s)
         {
             // Specify the list of culture and misc. supported formats.
             var dateFormats =
@@ -40,5 +39,4 @@ namespace Ichosoft.Expressions
             return null;
         }
     }
-    #endregion
 }

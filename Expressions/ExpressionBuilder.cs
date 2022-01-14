@@ -99,7 +99,7 @@ namespace Ichosoft.Expressions
             }
             catch(Exception e)
             {
-                throw new ParseException(message: ExceptionString.Expression_General, e);
+                throw new Exceptions.ParseException(message: ExceptionString.Expression_General, e);
             }
         }
         
@@ -171,7 +171,7 @@ namespace Ichosoft.Expressions
             return parameterType.FullName switch
             {
                 "System.String" => Expression.Constant(value: value, type: parameterType),
-                "System.DateTime" => Expression.Constant(value: TryParseDateTime(value.ToString()), type: parameterType),
+                "System.DateTime" => Expression.Constant(value: Converter.TryParseDateTime(value.ToString()), type: parameterType),
                 _ => throw new InvalidOperationException()
             };
         }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ichosoft.Expressions
+namespace Ichosoft.Expressions.Exceptions
 {
     public class ParseException : Exception
     {
