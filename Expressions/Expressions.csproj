@@ -13,7 +13,7 @@
       <!--<BuildNumber>$([System.DateTime]::UtcNow.ToString(mmff))</BuildNumber>-->
       <VersionPrefix>1.0.0</VersionPrefix>
       <Version>$(VersionPrefix).$(BuildNumber)</Version>
-      <Description>A .NET library for building expressions dynamically.s</Description>
+      <Description>A .NET library for building expressions dynamically.</Description>
       <Copyright>2021 hoeyi</Copyright>
       <Authors>hoeyi</Authors>
       <Company>hoeyi</Company>
