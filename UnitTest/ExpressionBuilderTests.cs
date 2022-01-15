@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ichosoft.Expressions.UnitTest.ModelExample;
+using Ichosoft.Expressions.UnitTest;
 
 namespace Ichosoft.Expressions.UnitTest
 {
@@ -17,21 +17,59 @@ namespace Ichosoft.Expressions.UnitTest
         public void GetSearchableMembers_ClassWithComplexProperty_ReturnsExpectedList()
         {
             var expBuilder = new ExpressionBuilder();
-            var res = expBuilder.GetSearchableMembers<Account>();
+            var res = expBuilder.GetSearchableMembers<ModelExample.Account>();
 
             SearchableMemberMetadata[] expected = new SearchableMemberMetadata[]
             {
                 new()
                 {
-                    Display = typeof(Account).GetProperty(nameof(Account.AccountNumber))
+                    Display = typeof(ModelExample.Account).GetProperty(nameof(ModelExample.Account.AccountNumber))
                         .GetCustomAttribute<DisplayAttribute>(),
-                    QualifiedMemberName = nameof(Account.AccountNumber)
+                    QualifiedMemberName = nameof(ModelExample.Account.AccountNumber)
                 },
                 new()
                 {
-                    Display = typeof(AccountObject).GetProperty(nameof(AccountObject.AccountObjectCode))
+                    Display = typeof(ModelExample.AccountObject)
+                        .GetProperty(nameof(ModelExample.AccountObject.AccountObjectCode))
                         .GetCustomAttribute<DisplayAttribute>(),
-                    QualifiedMemberName = $"{nameof(Account.AccountNavigation)}.{nameof(AccountObject.AccountObjectCode)}"
+                    QualifiedMemberName = $"{nameof(ModelExample.Account.AccountNavigation)}" +
+                        $".{nameof(ModelExample.AccountObject.AccountObjectCode)}"
+                }
+            };
+
+            Assert.IsInstanceOfType(res, typeof(IEnumerable<ISearchableMemberMetadata>));
+
+            bool basePropertyReturned = res.Contains(expected[0]);
+            bool nestedPropertyReturned = res.Contains(expected[1]);
+
+            Debug.WriteLine(string.Format("Base property check: {0}", basePropertyReturned ? "PASSED" : "FAILED"));
+            Debug.WriteLine(string.Format("Nested property check: {0}", basePropertyReturned ? "PASSED" : "FAILED"));
+
+            Assert.IsTrue(basePropertyReturned && nestedPropertyReturned);
+        }
+
+        [TestMethod]
+        public void GetSearchableMembers_ClassWithMetadata_ReturnsExpectedInstance()
+        {
+            var expBuilder = new ExpressionBuilder();
+            var res = expBuilder.GetSearchableMembers<ModelMetadataExample.Account>();
+
+            SearchableMemberMetadata[] expected = new SearchableMemberMetadata[]
+            {
+                new()
+                {
+                    Display = typeof(ModelMetadataExample.AccountMetadata)
+                        .GetProperty(nameof(ModelMetadataExample.AccountMetadata.AccountNumber))
+                        .GetCustomAttribute<DisplayAttribute>(),
+                    QualifiedMemberName = nameof(ModelMetadataExample.Account.AccountNumber)
+                },
+                new()
+                {
+                    Display = typeof(ModelMetadataExample.AccountObjectMetadata)
+                        .GetProperty(nameof(ModelMetadataExample.AccountObjectMetadata.AccountObjectCode))
+                        .GetCustomAttribute<DisplayAttribute>(),
+                    QualifiedMemberName = $"{nameof(ModelMetadataExample.Account.AccountNavigation)}" +
+                        $".{nameof(ModelMetadataExample.AccountObject.AccountObjectCode)}"
                 }
             };
 
@@ -50,14 +88,14 @@ namespace Ichosoft.Expressions.UnitTest
         public void GetExpression_Account_AccountObjectCode_EqualsString_YieldsExpression()
         {
             var expBuilder = new ExpressionBuilder();
-            var queryParameter = new QueryParameter<Account>(
-                memberName: $"{nameof(Account.AccountNavigation)}.{nameof(AccountObject.AccountObjectCode)}",
+            var queryParameter = new QueryParameter<ModelExample.Account>(
+                memberName: $"{nameof(ModelExample.Account.AccountNavigation)}.{nameof(ModelExample.AccountObject.AccountObjectCode)}",
                 @operator: ComparisonOperator.EqualTo,
                 paramValue: "Test");
 
-            Expression<Func<Account,bool>> observed = expBuilder.GetExpression(queryParameter);
+            Expression<Func<ModelExample.Account, bool>> observed = expBuilder.GetExpression(queryParameter);
 
-            IQueryable<Account> testAccounts = new List<Account>()
+            IQueryable<ModelExample.Account> testAccounts = new List<ModelExample.Account>()
             {
                 new()
                 {
@@ -73,7 +111,6 @@ namespace Ichosoft.Expressions.UnitTest
 
             var exp = testAccounts.FirstOrDefault(observed);
 
-            Debug.WriteLine($"Expected:\n{string.Join("\n", testAccounts)}");
             Assert.AreEqual(1, exp.AccountId);
         }
     }
