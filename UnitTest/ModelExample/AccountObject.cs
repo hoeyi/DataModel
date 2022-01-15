@@ -19,7 +19,7 @@ namespace Ichosoft.Expressions.UnitTest.ModelExample
         public int AccountObjectId { get; set; }
         [Required]
         [StringLength(16)]
-        [SearchableAttribute]
+        [Searchable]
         [Display(Name = "Account Code")]
         public string AccountObjectCode { get; set; }
         [Required]

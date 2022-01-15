@@ -21,4 +21,19 @@
     <ProjectReference Include="..\Expressions\Expressions.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Resources\ExtensionsTestString.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ExtensionsTestString.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\ExtensionsTestString.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExtensionsTestString.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

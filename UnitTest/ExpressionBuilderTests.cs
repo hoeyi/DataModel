@@ -73,6 +73,7 @@ namespace Ichosoft.Expressions.UnitTest
 
             var exp = testAccounts.FirstOrDefault(observed);
 
+            Debug.WriteLine($"Expected:\n{string.Join("\n", testAccounts)}");
             Assert.AreEqual(1, exp.AccountId);
         }
     }
