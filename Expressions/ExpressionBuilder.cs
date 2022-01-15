@@ -118,7 +118,7 @@ namespace Ichosoft.Expressions
             var baseSearchableMembers = getSearchableMembers(baseType)
                                     .Select(p =>
                                     {
-                                        var display = p.GetCustomAttribute<DisplayAttribute>();
+                                        var display = p.GetDisplay();
                                         return new SearchableMemberMetadata()
                                         {
                                             Display = display,
