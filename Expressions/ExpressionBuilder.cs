@@ -109,7 +109,7 @@ namespace Ichosoft.Expressions
             static IEnumerable<PropertyInfo> getSearchableMembers(Type type)
             {
                 return type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                        .Where(p => p.GetCustomAttribute<SearchableAttribute>() is not null);
+                        .Where(p => p.HasAttribute<SearchableAttribute>());
             }
 
             var baseType = typeof(T);
@@ -118,7 +118,7 @@ namespace Ichosoft.Expressions
             var baseSearchableMembers = getSearchableMembers(baseType)
                                     .Select(p =>
                                     {
-                                        var display = p.GetDisplay();
+                                        var display = p.GetAttribute<DisplayAttribute>();
                                         return new SearchableMemberMetadata()
                                         {
                                             Display = display,
@@ -141,7 +141,7 @@ namespace Ichosoft.Expressions
                                            })
                                            .Select(p =>
                                            {
-                                               var display = p.SearchableProperty.GetCustomAttribute<DisplayAttribute>();
+                                               var display = p.SearchableProperty.GetAttribute<DisplayAttribute>();
                                                return new SearchableMemberMetadata()
                                                {
                                                    Display = display,
@@ -149,8 +149,8 @@ namespace Ichosoft.Expressions
                                                };
                                            });
 
-            return baseSearchableMembers.Concat(nestedSearchableMembers)
-                    .Where(p => p.Display is not null).Cast<ISearchableMemberMetadata>().ToList();
+            var combinedResults = baseSearchableMembers.Concat(nestedSearchableMembers).Where(p => p.Display is not null);
+            return combinedResults.Cast<ISearchableMemberMetadata>().ToList();
         }
     }
     #endregion

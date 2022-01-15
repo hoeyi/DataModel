@@ -34,7 +34,7 @@ namespace Ichosoft.Expressions
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Display.Name, QualifiedMemberName);
+            return HashCode.Combine(Display?.Name, QualifiedMemberName);
         }
 
         public static bool operator ==(SearchableMemberMetadata lhs, SearchableMemberMetadata rhs)
