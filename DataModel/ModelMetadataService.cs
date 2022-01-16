@@ -7,6 +7,7 @@ namespace Ichosoft.DataModel
 {
     public class ModelMetadataService : IModelMetadataService
     {
+        #region Generic methods
         /// <inheritdoc/>
         public string DescriptionFor<TModel>(string memberName)
         {
@@ -42,7 +43,9 @@ namespace Ichosoft.DataModel
         {
             return ShortNameFor(typeof(TModel), memberName);
         }
+        #endregion
 
+        #region Type-parameter methods
         /// <inheritdoc/>
         public string DescriptionFor(Type type, string memberName)
         {
@@ -90,8 +93,8 @@ namespace Ichosoft.DataModel
 
             return result;
         }
+        #endregion
 
-        /// <inheritdoc/>
         private static DisplayAttribute GetDisplayAttribute(Type type, string memberName)
         {
             if (string.IsNullOrEmpty(memberName) || type is null)
@@ -101,12 +104,6 @@ namespace Ichosoft.DataModel
 
             return memberInfo?.GetAttribute<DisplayAttribute>();
             
-        }
-
-        /// <inheritdoc/>
-        private static DisplayAttribute GetDisplayAttribute<TModel>(string memberName)
-        {
-            return GetDisplayAttribute(typeof(TModel), memberName);
         }
     }
 }
