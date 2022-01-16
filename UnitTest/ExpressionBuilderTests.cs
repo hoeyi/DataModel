@@ -16,6 +16,32 @@ namespace Ichosoft.DataModel.UnitTest
     public class ExpressionBuilderTests
     {
         [TestMethod]
+        public void GetExpression_BooleanParameter_ReturnsInstance()
+        {
+            var expBuilder = new ExpressionBuilder();
+            var observed = expBuilder.GetExpression(
+                new QueryParameter<ModelExample.Account>(
+                    nameof(ModelExample.Account.IsComplianceTradable),
+                    ComparisonOperator.EqualTo,
+                    "true"));
+
+            Assert.IsInstanceOfType(observed, typeof(Expression<Func<ModelExample.Account, bool>>));
+
+            var testAccounts = new List<ModelExample.Account>()
+            {
+                new ModelExample.Account()
+                {
+                    AccountId = 0,
+                    IsComplianceTradable = true
+                }
+            };
+
+            Assert.AreEqual(
+                testAccounts.Where(a => a.AccountId == 0).FirstOrDefault(),
+                testAccounts.AsQueryable().Where(observed).FirstOrDefault());
+        }
+
+        [TestMethod]
         public void GetComparisonOperators_ReturnsExpectedList()
         {
             var expBuilder = new ExpressionBuilder();
