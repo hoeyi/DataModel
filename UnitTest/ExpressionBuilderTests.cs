@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Resources;
 using Ichosoft.DataModel.Expressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Ichosoft.DataModel.Annotations;
 
 namespace Ichosoft.DataModel.UnitTest
 {
@@ -18,22 +19,22 @@ namespace Ichosoft.DataModel.UnitTest
         public void GetComparisonOperators_ReturnsExpectedList()
         {
             var expBuilder = new ExpressionBuilder();
-            var res = expBuilder.GetComparisonOperatorLookup();
+            var res = expBuilder.GetComparisonOperators();
 
             var rm = new ResourceManager(typeof(DataModel.Resources.ComparisonOperatorString));
             string observed;
             string expected;
             
-            Assert.IsInstanceOfType(res, typeof(IDictionary<ComparisonOperator, DisplayAttribute>));
-            
+            var type = typeof(ComparisonOperator);
             foreach(var r in res)
             {
-                observed = r.Value?.GetName();
-                expected = rm.GetString($"{r.Key}");
+                observed = type.GetMember(memberName: $"{r}")?.GetAttribute<DisplayAttribute>()?.GetName();
+                expected = rm.GetString($"{r}");
                 Shared.WriteAreEqualDebug(expected, observed);
                 Assert.AreEqual(expected, observed);
             }
         }
+
         [TestMethod]
         public void GetSearchableMembers_ClassWithoutMetadata_ReturnsExpectedList()
         {

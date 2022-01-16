@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Resources;
 using System.Reflection;
 using System.Linq.Expressions;
 using System.Collections.Generic;
@@ -16,16 +15,12 @@ namespace Ichosoft.DataModel.Expressions
     /// </summary>
     public partial class ExpressionBuilder : IExpressionBuilder
     {
-        public IDictionary<ComparisonOperator, DisplayAttribute> GetComparisonOperatorLookup()
+        public IList<ComparisonOperator> GetComparisonOperators()
         {
-            ResourceManager rm = new(typeof(ComparisonOperatorString));
-
-            var type = typeof(ComparisonOperator);
             var members = Enum.GetValues(typeof(ComparisonOperator))
-                .Cast<ComparisonOperator>()
-                .ToDictionary(member => member, member => type.GetField($"{member}")?.GetAttribute<DisplayAttribute>());
+                .Cast<ComparisonOperator>();
 
-            return members;
+            return members.ToList();
         }
 
         public Expression<Func<TModel,bool>> GetExpression<TModel>(

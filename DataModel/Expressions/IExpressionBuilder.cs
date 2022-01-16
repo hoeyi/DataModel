@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 
 
@@ -13,10 +12,10 @@ namespace Ichosoft.DataModel.Expressions
     public interface IExpressionBuilder
     {
         /// <summary>
-        /// Creates a reference collection of search comparison operators and their display names.
+        /// Creates a reference collection of supported comparison operators.
         /// </summary>
-        /// <returns>A <see cref="IDictionary{TKey, TValue}"/> where each <see cref="KeyValuePair{TKey, TValue}.Key"/>
-        IDictionary<ComparisonOperator, DisplayAttribute> GetComparisonOperatorLookup();
+        /// <returns>An <see cref="IList"/> containing <see cref="ComparisonOperator"/>.</returns>
+        IList<ComparisonOperator> GetComparisonOperators();
 
         /// <summary>
         /// Creates a dynamic <see cref="Expression{TDelegate}"/> of <see cref="Func{T, TResult}"/>
