@@ -1,11 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Ichosoft.Expressions.Annotations;
+using Ichosoft.DataModel.Annotations;
+using Ichosoft.DataModel.UnitTest.Resources;
 
 #nullable disable
 
-namespace Ichosoft.Expressions.UnitTest.ModelExample
+namespace Ichosoft.DataModel.UnitTest.ModelExample
 {
     [Table("AccountObject", Schema = "EulerApp")]
     public partial class AccountObject
@@ -20,7 +21,9 @@ namespace Ichosoft.Expressions.UnitTest.ModelExample
         [Required]
         [StringLength(16)]
         [Searchable]
-        [Display(Name = "Account Code")]
+        [Display(
+            Name = nameof(DataModelTestString.AccountObject_AccountObjectCode),
+            ResourceType = typeof(DataModelTestString))]
         public string AccountObjectCode { get; set; }
         [Required]
         [StringLength(1)]

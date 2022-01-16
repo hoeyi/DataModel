@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ichosoft.Expressions.UnitTest.Resources {
+namespace Ichosoft.DataModel.UnitTest.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Ichosoft.Expressions.UnitTest.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ExtensionsTestString {
+    public class DataModelTestString {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ExtensionsTestString() {
+        internal DataModelTestString() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Ichosoft.Expressions.UnitTest.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ichosoft.Expressions.UnitTest.Resources.ExtensionsTestString", typeof(ExtensionsTestString).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ichosoft.DataModel.UnitTest.Resources.DataModelTestString", typeof(DataModelTestString).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,20 @@ namespace Ichosoft.Expressions.UnitTest.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Full name.
+        ///   Looks up a localized string similar to Account number.
         /// </summary>
-        public static string Model_Name_Display {
+        public static string Account_AccountNumber {
             get {
-                return ResourceManager.GetString("Model.Name.Display", resourceCulture);
+                return ResourceManager.GetString("Account.AccountNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account code.
+        /// </summary>
+        public static string AccountObject_AccountObjectCode {
+            get {
+                return ResourceManager.GetString("AccountObject.AccountObjectCode", resourceCulture);
             }
         }
     }

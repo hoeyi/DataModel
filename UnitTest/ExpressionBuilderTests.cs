@@ -1,25 +1,46 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Diagnostics;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Resources;
+using Ichosoft.DataModel.Expressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ichosoft.Expressions.UnitTest;
 
-namespace Ichosoft.Expressions.UnitTest
+namespace Ichosoft.DataModel.UnitTest
 {
     [TestClass]
     public class ExpressionBuilderTests
     {
         [TestMethod]
-        public void GetSearchableMembers_ClassWithComplexProperty_ReturnsExpectedList()
+        public void GetComparisonOperators_ReturnsExpectedList()
+        {
+            var expBuilder = new ExpressionBuilder();
+            var res = expBuilder.GetComparisonOperatorLookup();
+
+            var rm = new ResourceManager(typeof(DataModel.Resources.ComparisonOperatorString));
+            string observed;
+            string expected;
+            
+            Assert.IsInstanceOfType(res, typeof(IDictionary<ComparisonOperator, DisplayAttribute>));
+            
+            foreach(var r in res)
+            {
+                observed = r.Value?.GetName();
+                expected = rm.GetString($"{r.Key}");
+                Shared.WriteAreEqualDebug(expected, observed);
+                Assert.AreEqual(expected, observed);
+            }
+        }
+        [TestMethod]
+        public void GetSearchableMembers_ClassWithoutMetadata_ReturnsExpectedList()
         {
             var expBuilder = new ExpressionBuilder();
             var res = expBuilder.GetSearchableMembers<ModelExample.Account>();
 
-            SearchableMemberMetadata[] expected = new SearchableMemberMetadata[]
+            SearchableMemberMetadata[] expectedArray = new SearchableMemberMetadata[]
             {
                 new()
                 {
@@ -39,22 +60,32 @@ namespace Ichosoft.Expressions.UnitTest
 
             Assert.IsInstanceOfType(res, typeof(IEnumerable<ISearchableMemberMetadata>));
 
-            bool basePropertyReturned = res.Contains(expected[0]);
-            bool nestedPropertyReturned = res.Contains(expected[1]);
+            bool basePropertyReturned = res.Contains(expectedArray[0]);
+            bool nestedPropertyReturned = res.Contains(expectedArray[1]);
 
             Debug.WriteLine(string.Format("Base property check: {0}", basePropertyReturned ? "PASSED" : "FAILED"));
             Debug.WriteLine(string.Format("Nested property check: {0}", basePropertyReturned ? "PASSED" : "FAILED"));
+
+            string observed = expectedArray[0].Display?.GetName();
+            string expected = Resources.DataModelTestString.Account_AccountNumber;
+            Shared.WriteAreEqualDebug(expected, observed);
+            Assert.AreEqual(expected, observed);
+
+            observed = expectedArray[1].Display?.GetName();
+            expected = Resources.DataModelTestString.AccountObject_AccountObjectCode;
+            Shared.WriteAreEqualDebug(expected, observed);
+            Assert.AreEqual(expected, observed);
 
             Assert.IsTrue(basePropertyReturned && nestedPropertyReturned);
         }
 
         [TestMethod]
-        public void GetSearchableMembers_ClassWithMetadata_ReturnsExpectedInstance()
+        public void GetSearchableMembers_ClassWithMetadata_ReturnsExpectedList()
         {
             var expBuilder = new ExpressionBuilder();
             var res = expBuilder.GetSearchableMembers<ModelMetadataExample.Account>();
 
-            SearchableMemberMetadata[] expected = new SearchableMemberMetadata[]
+            SearchableMemberMetadata[] expectedArray = new SearchableMemberMetadata[]
             {
                 new()
                 {
@@ -75,11 +106,21 @@ namespace Ichosoft.Expressions.UnitTest
 
             Assert.IsInstanceOfType(res, typeof(IEnumerable<ISearchableMemberMetadata>));
 
-            bool basePropertyReturned = res.Contains(expected[0]);
-            bool nestedPropertyReturned = res.Contains(expected[1]);
+            bool basePropertyReturned = res.Contains(expectedArray[0]);
+            bool nestedPropertyReturned = res.Contains(expectedArray[1]);
 
             Debug.WriteLine(string.Format("Base property check: {0}", basePropertyReturned ? "PASSED" : "FAILED"));
             Debug.WriteLine(string.Format("Nested property check: {0}", basePropertyReturned ? "PASSED" : "FAILED"));
+
+            string observed = expectedArray[0].Display?.GetName();
+            string expected = Resources.DataModelTestString.Account_AccountNumber;
+            Shared.WriteAreEqualDebug(expected, observed);
+            Assert.AreEqual(expected, observed);
+
+            observed = expectedArray[1].Display?.GetName();
+            expected = Resources.DataModelTestString.AccountObject_AccountObjectCode;
+            Shared.WriteAreEqualDebug(expected, observed);
+            Assert.AreEqual(expected, observed);
 
             Assert.IsTrue(basePropertyReturned && nestedPropertyReturned);
         }

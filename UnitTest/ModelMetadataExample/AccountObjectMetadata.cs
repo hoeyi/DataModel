@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Ichosoft.Expressions.Annotations;
+﻿using System.ComponentModel.DataAnnotations;
+using Ichosoft.DataModel.Annotations;
+using Ichosoft.DataModel.UnitTest.Resources;
 
-namespace Ichosoft.Expressions.UnitTest.ModelMetadataExample
+namespace Ichosoft.DataModel.UnitTest.ModelMetadataExample
 {
     public class AccountObjectMetadata
     {
         [Searchable]
-        [Display(Name = "Account Code")]
+        [Display(
+            Name = nameof(DataModelTestString.AccountObject_AccountObjectCode),
+            ResourceType = typeof(DataModelTestString))]
         public string AccountObjectCode { get; set; }
     }
 
