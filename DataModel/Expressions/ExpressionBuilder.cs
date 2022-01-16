@@ -15,6 +15,7 @@ namespace Ichosoft.DataModel.Expressions
     /// </summary>
     public partial class ExpressionBuilder : IExpressionBuilder
     {
+        /// <inheritdoc/>
         public IList<ComparisonOperator> GetComparisonOperators()
         {
             var members = Enum.GetValues(typeof(ComparisonOperator))
@@ -23,6 +24,7 @@ namespace Ichosoft.DataModel.Expressions
             return members.ToList();
         }
 
+        /// <inheritdoc/>
         public Expression<Func<TModel,bool>> GetExpression<TModel>(
             IQueryParameter<TModel> queryParameter)
         {
@@ -98,7 +100,8 @@ namespace Ichosoft.DataModel.Expressions
                 throw new Exceptions.ParseException(message: ExceptionString.Expression_General, e);
             }
         }
-        
+
+        /// <inheritdoc/>
         public IList<ISearchableMemberMetadata> GetSearchableMembers<T>()
         {
             // Local method for getting the searchable members of a given type.
@@ -167,6 +170,7 @@ namespace Ichosoft.DataModel.Expressions
             return parameterType.FullName switch
             {
                 "System.String" => Expression.Constant(value: value, type: parameterType),
+                "System.Boolean" => Expression.Constant(value: Convert.ToBoolean(value), type: parameterType),
                 "System.DateTime" => Expression.Constant(value: Converter.TryParseDateTime(value.ToString()), type: parameterType),
                 _ => throw new InvalidOperationException()
             };
@@ -210,14 +214,19 @@ namespace Ichosoft.DataModel.Expressions
                 ComparisonOperator.IsNotNull
             };
 
+            // Define comparisons valid for boolean types.
+            var boolOperators = new ComparisonOperator[]
+            {
+                ComparisonOperator.EqualTo,
+                ComparisonOperator.NotEqualTo
+            };
+
             if(typeIsNullable)
             {
                 Array.Resize(ref numericOperators, numericOperators.Length + 2);
                 numericOperators[^2] = ComparisonOperator.IsNull;
                 numericOperators[^1] = ComparisonOperator.IsNotNull;
             }
-
-            
 
             // Map the types to their supported operators.
             var typeOperatorLookup = new Dictionary<Type, ComparisonOperator[]>()
@@ -232,6 +241,8 @@ namespace Ichosoft.DataModel.Expressions
 
                 { typeof(char), textOperators },
                 { typeof(string), textOperators },
+
+                { typeof(bool), boolOperators }
             };
 
             // Throw exception if mapped array does not contain the comparison operator, or if 
