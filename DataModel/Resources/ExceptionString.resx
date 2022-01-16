@@ -117,16 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Expression.FieldInvalidForMethod" xml:space="preserve">
+    <value>{0} is not valid for this field.</value>
+    <comment>{0} is the search method</comment>
+  </data>
   <data name="Expression.General" xml:space="preserve">
     <value>A search expression could not be built from the given parameters.</value>
   </data>
   <data name="Expression.NestingNotSupported" xml:space="preserve">
     <value>Search expressions may only use parameters nested one level deep.</value>
-  </data>
-  <data name="Expression.ParameterInvalidForMethod" xml:space="preserve">
-    <value>{0} cannot be used with {1}.</value>
-    <comment>{0} is the search method
-{1} is the parameter</comment>
   </data>
   <data name="Expression.SearchMemberNull" xml:space="preserve">
     <value>Search member cannot be null.</value>

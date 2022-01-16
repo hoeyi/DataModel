@@ -61,6 +61,15 @@ namespace Ichosoft.DataModel.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} is not valid for this field..
+        /// </summary>
+        internal static string Expression_FieldInvalidForMethod {
+            get {
+                return ResourceManager.GetString("Expression.FieldInvalidForMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A search expression could not be built from the given parameters..
         /// </summary>
         internal static string Expression_General {
@@ -75,15 +84,6 @@ namespace Ichosoft.DataModel.Resources {
         internal static string Expression_NestingNotSupported {
             get {
                 return ResourceManager.GetString("Expression.NestingNotSupported", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} cannot be used with {1}..
-        /// </summary>
-        internal static string Expression_ParameterInvalidForMethod {
-            get {
-                return ResourceManager.GetString("Expression.ParameterInvalidForMethod", resourceCulture);
             }
         }
         

@@ -239,13 +239,14 @@ namespace Ichosoft.DataModel.Expressions
             if (!typeOperatorLookup.ContainsKey(type) ||
                 !typeOperatorLookup[type].Contains(@operator))
             {
-                string operatorDisplayName = typeof(ComparisonOperator).GetProperty($"{@operator}")
+                string operatorDisplayName = typeof(ComparisonOperator)
+                    .GetMember(memberName: $"{@operator}")
                     ?.GetAttribute<DisplayAttribute>()
-                    ?.GetName();
+                    ?.GetName() ?? $"{typeof(ComparisonOperator).Name}.{@operator}";
 
                 throw new NotSupportedException(
                     string.Format(
-                        ExceptionString.Expression_ParameterInvalidForMethod,
+                        ExceptionString.Expression_FieldInvalidForMethod,
                         operatorDisplayName,
                         $"{property.DeclaringType}.{property.Name}"));
             }
