@@ -11,6 +11,20 @@ namespace Ichosoft.DataModel.Annotations
     public static class PropertyExtension
     {
         /// <summary>
+        /// Gets the <see cref="FieldInfo"/> for <see cref="Enum"/> types, 
+        /// else gets the <see cref="PropertyInfo"/>.
+        /// </summary>
+        /// <param name="type">The <see cref="Type"/>.</param>
+        /// <param name="memberName">The member name.</param>
+        /// <returns>A <see cref="MemberInfo"/> if a match is found, else null.</returns>
+        public static MemberInfo GetMember(this Type type, string memberName)
+        {
+            return type.IsEnum ?
+                type.GetField(memberName) :
+                type.GetProperty(memberName, BindingFlags.Public | BindingFlags.Instance);
+        }
+
+        /// <summary>
         /// Gets the first <typeparamref name="TAttribute"/> applied to this member.
         /// </summary>
         /// <typeparam name="TAttribute">The attribute type.</typeparam>
