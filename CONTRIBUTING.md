@@ -1,4 +1,4 @@
-# Contributing to `Expressions` #
+# Contributing to `DataModel` #
 
 * [Commit Message Guidelines](#commit-message-guidelines)
 * [Object Naming Conventions](#object-naming-conventions)
