@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ichosoft.Expressions.Resources {
+namespace Ichosoft.DataModel.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Ichosoft.Expressions.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class ComparisonOperator {
+    internal class ExceptionString {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ComparisonOperator() {
+        internal ExceptionString() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Ichosoft.Expressions.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ichosoft.Expressions.Resources.ComparisonOperator", typeof(ComparisonOperator).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ichosoft.DataModel.Resources.ExceptionString", typeof(ExceptionString).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,83 +61,38 @@ namespace Ichosoft.Expressions.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to contains.
+        ///   Looks up a localized string similar to A search expression could not be built from the given parameters..
         /// </summary>
-        internal static string Contains {
+        internal static string Expression_General {
             get {
-                return ResourceManager.GetString("Contains", resourceCulture);
+                return ResourceManager.GetString("Expression.General", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to equals.
+        ///   Looks up a localized string similar to Search expressions may only use parameters nested one level deep..
         /// </summary>
-        internal static string EqualTo {
+        internal static string Expression_NestingNotSupported {
             get {
-                return ResourceManager.GetString("EqualTo", resourceCulture);
+                return ResourceManager.GetString("Expression.NestingNotSupported", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to greater than.
+        ///   Looks up a localized string similar to {0} cannot be used with {1}..
         /// </summary>
-        internal static string GreaterThan {
+        internal static string Expression_ParameterInvalidForMethod {
             get {
-                return ResourceManager.GetString("GreaterThan", resourceCulture);
+                return ResourceManager.GetString("Expression.ParameterInvalidForMethod", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to greater than or equals.
+        ///   Looks up a localized string similar to Search member cannot be null..
         /// </summary>
-        internal static string GreaterThanOrEqualTo {
+        internal static string Expression_SearchMemberNull {
             get {
-                return ResourceManager.GetString("GreaterThanOrEqualTo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to is not null.
-        /// </summary>
-        internal static string IsNotNull {
-            get {
-                return ResourceManager.GetString("IsNotNull", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to is null.
-        /// </summary>
-        internal static string IsNull {
-            get {
-                return ResourceManager.GetString("IsNull", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to less than.
-        /// </summary>
-        internal static string LessThan {
-            get {
-                return ResourceManager.GetString("LessThan", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to less than or equals.
-        /// </summary>
-        internal static string LessThanOrEqualTo {
-            get {
-                return ResourceManager.GetString("LessThanOrEqualTo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to not equal to.
-        /// </summary>
-        internal static string NotEqualTo {
-            get {
-                return ResourceManager.GetString("NotEqualTo", resourceCulture);
+                return ResourceManager.GetString("Expression.SearchMemberNull", resourceCulture);
             }
         }
     }

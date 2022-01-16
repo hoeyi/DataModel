@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Ichosoft.Expressions
+namespace Ichosoft.DataModel.Expressions
 {
     /// <summary>
     /// Represents a searchable class property.

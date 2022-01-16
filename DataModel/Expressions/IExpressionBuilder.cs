@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Ichosoft.Expressions.UnitTest")]
 
-namespace Ichosoft.Expressions
+
+namespace Ichosoft.DataModel.Expressions
 {
     /// <summary>
     /// Represents a helper class for building filter expressions.
@@ -15,9 +16,8 @@ namespace Ichosoft.Expressions
         /// <summary>
         /// Creates a reference collection of search comparison operators and their display names.
         /// </summary>
-        /// <returns>A <see cref="IDictionary{TKey, TValue}"/> where <see cref="IDictionary{TKey, TValue}.Keys"/> 
-        /// are <see cref="ComparisonOperator"/> and <see cref="IDictionary{TKey, TValue}.Values"/> are string their string representations.</returns>
-        IDictionary<ComparisonOperator, string> GetComparisonOperatorLookup();
+        /// <returns>A <see cref="IDictionary{TKey, TValue}"/> where each <see cref="KeyValuePair{TKey, TValue}.Key"/>
+        IDictionary<ComparisonOperator, DisplayAttribute> GetComparisonOperatorLookup();
 
         /// <summary>
         /// Creates a dynamic <see cref="Expression{TDelegate}"/> of <see cref="Func{T, TResult}"/>

@@ -2,12 +2,12 @@
 
   <PropertyGroup>
       <TargetFramework>net5.0</TargetFramework>
-      <AssemblyName>Ichosoft.Expressions</AssemblyName>
-      <RootNamespace>Ichosoft.Expressions</RootNamespace>
+      <AssemblyName>Ichosoft.DataModel</AssemblyName>
+      <RootNamespace>Ichosoft.DataModel</RootNamespace>
       <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
       <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 
-      <PackageId>Ichosoft.Expressions</PackageId>
+      <PackageId>Ichosoft.DataModel</PackageId>
       <BuildNumber Condition="$(BuildNumber) == ''">0</BuildNumber>
       <!--Comment out build number to avoid auto-updating project build properties. Uncomment for release builds only.-->
       <!--<BuildNumber>$([System.DateTime]::UtcNow.ToString(mmff))</BuildNumber>-->
@@ -17,7 +17,7 @@
       <Copyright>2021 hoeyi</Copyright>
       <Authors>hoeyi</Authors>
       <Company>hoeyi</Company>
-      <Product>Ichosoft.Expressions</Product>
+      <Product>Ichosoft.DataModel</Product>
       <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
       <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
       <PackageProjectUrl>https://github.com/Ichosoft/Expressions</PackageProjectUrl>
@@ -45,10 +45,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ExceptionString.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\ComparisonOperator.Designer.cs">
+    <Compile Update="Resources\ComparisonOperatorString.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ComparisonOperator.resx</DependentUpon>
+      <DependentUpon>ComparisonOperatorString.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -57,9 +57,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ExceptionString.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\ComparisonOperator.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ComparisonOperator.Designer.cs</LastGenOutput>
+    <EmbeddedResource Update="Resources\ComparisonOperatorString.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ComparisonOperatorString.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 
-namespace Ichosoft.Expressions
+[assembly: InternalsVisibleTo("Ichosoft.DataModel.UnitTest")]
+
+namespace Ichosoft.DataModel
 {
     static class Converter
     {

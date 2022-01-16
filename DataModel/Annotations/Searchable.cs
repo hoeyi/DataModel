@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ichosoft.Expressions.Annotations
+namespace Ichosoft.DataModel.Annotations
 {
     /// <summary>
     /// Allows for flagging properties as searchable using dynamic expression builders.

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ichosoft.Expressions
+namespace Ichosoft.DataModel.Expressions
 {
     public class QueryParameter<TModel> : IQueryParameter<TModel>
     {

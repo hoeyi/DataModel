@@ -4,11 +4,11 @@ using System.Resources;
 using System.Reflection;
 using System.Linq.Expressions;
 using System.Collections.Generic;
-using Ichosoft.Expressions.Annotations;
-using Ichosoft.Expressions.Resources;
+using Ichosoft.DataModel.Annotations;
+using Ichosoft.DataModel.Resources;
 using System.ComponentModel.DataAnnotations;
 
-namespace Ichosoft.Expressions
+namespace Ichosoft.DataModel.Expressions
 {
     #region IExpressionBuilder implementation
     /// <summary>
@@ -16,13 +16,14 @@ namespace Ichosoft.Expressions
     /// </summary>
     public partial class ExpressionBuilder : IExpressionBuilder
     {
-        public IDictionary<ComparisonOperator, string> GetComparisonOperatorLookup()
+        public IDictionary<ComparisonOperator, DisplayAttribute> GetComparisonOperatorLookup()
         {
-            ResourceManager rm = new(typeof(Resources.ComparisonOperator));
+            ResourceManager rm = new(typeof(ComparisonOperatorString));
 
+            var type = typeof(ComparisonOperator);
             var members = Enum.GetValues(typeof(ComparisonOperator))
                 .Cast<ComparisonOperator>()
-                .ToDictionary(member => member, member => rm.GetString($"{member}"));
+                .ToDictionary(member => member, member => type.GetField($"{member}")?.GetAttribute<DisplayAttribute>());
 
             return members;
         }
@@ -243,8 +244,9 @@ namespace Ichosoft.Expressions
             if (!typeOperatorLookup.ContainsKey(type) ||
                 !typeOperatorLookup[type].Contains(@operator))
             {
-                string operatorDisplayName = new ResourceManager(typeof(Resources.ComparisonOperator))
-                    .GetString($"{@operator}") ?? $"{@operator}";
+                string operatorDisplayName = typeof(ComparisonOperator).GetProperty($"{@operator}")
+                    ?.GetAttribute<DisplayAttribute>()
+                    ?.GetName();
 
                 throw new NotSupportedException(
                     string.Format(
