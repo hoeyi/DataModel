@@ -1,7 +1,5 @@
 # Ichosoft.DataModel #
-This library contains class and methods for supporting a model utilizing data annotations for metadata support. The two public namepsaces are:
-* **DataModel.Expressions:** Supports generation of queries dynamically.
-* **DataModel.Annotations:** Provides helper methods for working with `System.ComponentModel.DataAnnotations`.
+This library contains class and methods for supporting a model utilizing data annotations for metadata support.
 
 * [Building Project](#building-prjoject)
 * [Public API](#public-api)
@@ -20,7 +18,7 @@ This library maintains the following API for consumption:
 
 [DataModel](#DataModel)
 * [IModelMetadataService](#IModelMetadataService)
-* [ModelMetadataExtension](#ModelMetadataExtensions)
+* [ModelMetadataExtension](#ModelMetadataExtension)
 
 [DataModel.Annotations](#DataModel.Annotations)
 * [NounAttribute](#NounAttribute)
@@ -45,7 +43,11 @@ This library maintains the following API for consumption:
 [Details](\DataModel\ModelMetadataExtension.cs)
 ###
 
+---
+
 ### DataModel.Annotations
+Provides helper methods for working with `System.ComponentModel.DataAnnotations`.
+
 #### NounAttribute ####
 `NounAttribute` describes the singular and plural forms and articles of a noun.
 
@@ -62,7 +64,11 @@ This library maintains the following API for consumption:
 [Details](\DataModel\Annotations\SearchableAttribute.cs)
 ###
 
+---
+
 ### DataModel.Expressions 
+Supports generation of queries dynamically.
+
 #### IExpressionBuilder ####
 `IExpressionBuilder` provides generic methods used for building query expressions dynamically.
 
