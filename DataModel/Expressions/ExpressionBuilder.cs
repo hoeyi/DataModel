@@ -245,10 +245,7 @@ namespace Ichosoft.DataModel.Expressions
                     ?.GetName() ?? $"{typeof(ComparisonOperator).Name}.{@operator}";
 
                 throw new NotSupportedException(
-                    string.Format(
-                        ExceptionString.Expression_FieldInvalidForMethod,
-                        operatorDisplayName,
-                        $"{property.DeclaringType}.{property.Name}"));
+                    string.Format(ExceptionString.Expression_OperatorInvalidForField, operatorDisplayName));
             }
         }
     }
