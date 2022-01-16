@@ -10,7 +10,7 @@ using Ichosoft.DataModel.Expressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ichosoft.DataModel.Annotations;
 
-namespace Ichosoft.DataModel.UnitTest
+namespace Ichosoft.DataModel.UnitTest.TestExpressions
 {
     [TestClass]
     public class ExpressionBuilderTests
