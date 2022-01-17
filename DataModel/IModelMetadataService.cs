@@ -9,6 +9,15 @@ namespace Ichosoft.DataModel
     public interface IModelMetadataService
     {
         /// <summary>
+        /// Gets the attribute applied to the type.
+        /// </summary>
+        /// <typeparam name="TAttribute"></typeparam>
+        /// <param name="type">The type to check for the attribute.</param>
+        /// <returns>A <typeparamref name="TAttribute"/> instance if it exists, else null.</returns>
+        TAttribute AttributeFor<TAttribute>(Type type)
+            where TAttribute : Attribute;
+
+        /// <summary>
         /// Gets the attribute applied to a member declared within the given type, that 
         /// matches the type parameter.
         /// </summary>

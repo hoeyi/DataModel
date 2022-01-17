@@ -25,6 +25,34 @@ namespace Ichosoft.DataModel.Annotations
         }
 
         /// <summary>
+        /// Gets the first attribute of the given type applied to this type.
+        /// </summary>
+        /// <typeparam name="TAttribute">The attribute type to check for.</typeparam>
+        /// <param name="type"></param>
+        /// <returns>A <typeparamref name="TAttribute"/> if it exists, else null.</returns>
+        public static TAttribute GetAttribute<TAttribute>(this Type type)
+            where TAttribute : Attribute
+        {
+            TAttribute attribute;
+
+            // Check the declarying type of a metdatatype.
+            // If not found return display
+            if (type.GetCustomAttribute(typeof(MetadataTypeAttribute)) 
+                is not MetadataTypeAttribute metadataType)
+            {
+                attribute = type.GetCustomAttribute<TAttribute>();
+            }
+            else
+            {
+                // If metdatatype exists return display attribute applied 
+                // to member of the same name.
+                attribute = metadataType.MetadataClassType.GetCustomAttribute<TAttribute>();
+            }
+
+            return attribute;
+        }
+
+        /// <summary>
         /// Gets the first <typeparamref name="TAttribute"/> applied to this member.
         /// </summary>
         /// <typeparam name="TAttribute">The attribute type.</typeparam>

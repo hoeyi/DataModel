@@ -1,13 +1,14 @@
-﻿using Ichosoft.DataModel.Annotations;
+﻿using System;
 using System.Reflection;
 using System.ComponentModel.DataAnnotations;
-using System;
+using Ichosoft.DataModel.Annotations;
 
 namespace Ichosoft.DataModel
 {
     public class ModelMetadataService : IModelMetadataService
     {
         #region Generic methods
+
         /// <inheritdoc/>
         public string DescriptionFor<TModel>(string memberName)
         {
@@ -46,6 +47,25 @@ namespace Ichosoft.DataModel
         #endregion
 
         #region Type-parameter methods
+
+        /// <inheritdoc/>   
+        public TAttribute AttributeFor<TAttribute>(Type type) where TAttribute : Attribute
+        {
+            return type?.GetAttribute<TAttribute>();
+        }
+
+        /// <inheritdoc/>
+        public TAttribute AttributeFor<TAttribute>(Type type, string memberName) 
+            where TAttribute : Attribute
+        {
+            if (string.IsNullOrEmpty(memberName) || type is null)
+                return null;
+
+            MemberInfo memberInfo = type.GetMember(memberName: memberName);
+
+            return memberInfo?.GetAttribute<TAttribute>();
+        }
+
         /// <inheritdoc/>
         public string DescriptionFor(Type type, string memberName)
         {
@@ -104,18 +124,6 @@ namespace Ichosoft.DataModel
 
             return memberInfo?.GetAttribute<DisplayAttribute>();
             
-        }
-
-        /// <inheritdoc/>
-        public TAttribute AttributeFor<TAttribute>(Type type, string memberName) 
-            where TAttribute : Attribute
-        {
-            if (string.IsNullOrEmpty(memberName) || type is null)
-                return null;
-
-            MemberInfo memberInfo = type.GetMember(memberName: memberName);
-
-            return memberInfo?.GetAttribute<TAttribute>();
         }
     }
 }
