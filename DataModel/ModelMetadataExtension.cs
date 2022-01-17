@@ -15,6 +15,20 @@ namespace Ichosoft.DataModel
             new ModelMetadataService();
 
         /// <summary>
+        /// Gets the attribute applied to a member declared within the given type, that 
+        /// matches the type parameter.
+        /// </summary>
+        /// <typeparam name="TAttribute">The attribute type.</typeparam>
+        /// <param name="type">The declaring type.</param>
+        /// <param name="memberName">The member name.</param>
+        /// <returns>A <typeparamref name="TAttribute"/> instance if it exists, else null.</returns>
+        public static TAttribute AttributeFor<TAttribute>(this Type type, string memberName)
+            where TAttribute : Attribute
+        {
+            return metadataService?.AttributeFor<TAttribute>(type, memberName);
+        }
+
+        /// <summary>
         /// Gets the description for the member declared in the given type.
         /// </summary>
         /// <param name="type"></param>
@@ -81,5 +95,6 @@ namespace Ichosoft.DataModel
         {
             return metadataService?.ShortNameFor(type, memberName);
         }
+
     }
 }
