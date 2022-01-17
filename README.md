@@ -2,7 +2,7 @@
 This library contains class and methods for supporting a model utilizing data annotations for metadata support.
 
 * [Building Project](#building-prjoject)
-* [Public API](#public-api)
+* [Public API](#api)
 
 Be sure to read the [guidelines for contributing](CONTRIBUTING.md) to this project.
 
@@ -13,7 +13,7 @@ By default, the project `$(BuildNumber)` property is set to zero. Uncomment the 
 
 <br/>
 
-## Public API ##
+## API ##
 This library maintains the following API for consumption:
 
 [DataModel](#DataModel)
@@ -22,7 +22,6 @@ This library maintains the following API for consumption:
 
 [DataModel.Annotations](#DataModel.Annotations)
 * [NounAttribute](#NounAttribute)
-* [PropertyExtension](#PropertyExtensions)
 * [SearchableAttribute](#SearchableAttribute)
 
 [DataModel.Expressions](#DataModel.Expressions)
@@ -52,11 +51,6 @@ Provides helper methods for working with `System.ComponentModel.DataAnnotations`
 `NounAttribute` describes the singular and plural forms and articles of a noun.
 
 [Details](\DataModel\Annotations\NounAttribute.cs)
-
-#### PropertyExtension ####
-`PropertyExtension` provides extension methods for accessing metadata n a way that supports `MetadataType` use on model classes.
-
-[Details](\DataModel\Annotations\PropertyExtension.cs)
 
 #### SearchableAttribute ####
 `SearchableAttribute` signals that a member can be passed to `Expressions.IExpressionBuilder`
