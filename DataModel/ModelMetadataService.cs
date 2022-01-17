@@ -105,5 +105,17 @@ namespace Ichosoft.DataModel
             return memberInfo?.GetAttribute<DisplayAttribute>();
             
         }
+
+        /// <inheritdoc/>
+        public TAttribute AttributeFor<TAttribute>(Type type, string memberName) 
+            where TAttribute : Attribute
+        {
+            if (string.IsNullOrEmpty(memberName) || type is null)
+                return null;
+
+            MemberInfo memberInfo = type.GetMember(memberName: memberName);
+
+            return memberInfo?.GetAttribute<TAttribute>();
+        }
     }
 }

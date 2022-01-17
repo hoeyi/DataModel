@@ -5,10 +5,10 @@ using System;
 namespace Ichosoft.DataModel.Annotations
 {
     /// <summary>
-    /// Extension methods for <see cref="PropertyInfo"/> to support 
+    /// Extension methods for <see cref="MemberInfo"/> to support 
     /// <see cref="MetadataTypeAttribute"/> patterns.
     /// </summary>
-    public static class PropertyExtension
+    static class PropertyExtension
     {
         /// <summary>
         /// Gets the <see cref="FieldInfo"/> for <see cref="Enum"/> types, 

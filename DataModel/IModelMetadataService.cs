@@ -1,4 +1,5 @@
 ﻿using System;
+using Ichosoft.DataModel.Annotations;
 
 namespace Ichosoft.DataModel
 {
@@ -7,6 +8,17 @@ namespace Ichosoft.DataModel
     /// </summary>
     public interface IModelMetadataService
     {
+        /// <summary>
+        /// Gets the attribute applied to a member declared within the given type, that 
+        /// matches the type parameter.
+        /// </summary>
+        /// <typeparam name="TAttribute">The attribute type.</typeparam>
+        /// <param name="type">The declaring type.</param>
+        /// <param name="memberName">The member name.</param>
+        /// <returns>A <typeparamref name="TAttribute"/> instance if it exists, else null.</returns>
+        TAttribute AttributeFor<TAttribute>(Type type, string memberName)
+            where TAttribute : Attribute;
+
         /// <summary>
         /// Gets the description for the member declared in the given type.
         /// </summary>
