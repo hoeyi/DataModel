@@ -65,7 +65,43 @@ namespace Ichosoft.DataModel.UnitTest.Resources {
         /// </summary>
         public static string Account_AccountNumber {
             get {
-                return ResourceManager.GetString("Account.AccountNumber", resourceCulture);
+                return ResourceManager.GetString("Account_AccountNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to accounts.
+        /// </summary>
+        public static string Account_Plural {
+            get {
+                return ResourceManager.GetString("Account_Plural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to the.
+        /// </summary>
+        public static string Account_PluralArticle {
+            get {
+                return ResourceManager.GetString("Account_PluralArticle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to account.
+        /// </summary>
+        public static string Account_Singular {
+            get {
+                return ResourceManager.GetString("Account_Singular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to the.
+        /// </summary>
+        public static string Account_SingularArticle {
+            get {
+                return ResourceManager.GetString("Account_SingularArticle", resourceCulture);
             }
         }
         
@@ -74,7 +110,7 @@ namespace Ichosoft.DataModel.UnitTest.Resources {
         /// </summary>
         public static string AccountObject_AccountObjectCode {
             get {
-                return ResourceManager.GetString("AccountObject.AccountObjectCode", resourceCulture);
+                return ResourceManager.GetString("AccountObject_AccountObjectCode", resourceCulture);
             }
         }
     }

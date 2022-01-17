@@ -4,6 +4,13 @@ using Ichosoft.DataModel.UnitTest.Resources;
 
 namespace Ichosoft.DataModel.UnitTest.ModelMetadataExample
 {
+    [Noun(
+        Plural = nameof(DataModelTestString.Account_Plural),
+        PluralArticle = nameof(DataModelTestString.Account_PluralArticle),
+        Singular = nameof(DataModelTestString.Account_Singular),
+        SingularArticle = nameof(DataModelTestString.Account_SingularArticle),
+        ResourceType = typeof(DataModelTestString)
+        )]
     public  class AccountMetadata
     {
         [Searchable]

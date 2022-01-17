@@ -9,6 +9,13 @@ using Ichosoft.DataModel.UnitTest.Resources;
 namespace Ichosoft.DataModel.UnitTest.ModelExample
 {
     [Table("Account", Schema = "EulerApp")]
+    [Noun(
+        Plural = nameof(DataModelTestString.Account_Plural),
+        PluralArticle = nameof(DataModelTestString.Account_PluralArticle),
+        Singular = nameof(DataModelTestString.Account_Singular),
+        SingularArticle = nameof(DataModelTestString.Account_SingularArticle),
+        ResourceType = typeof(DataModelTestString)
+        )]
     public partial class Account
     {
         public Account()
