@@ -181,5 +181,111 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
 
             Assert.AreEqual(1, exp.AccountId);
         }
+
+        [TestMethod]
+        public void GetExpression_Account_NullableDateTimeProperty_HasValue_YieldsExpression()
+        {
+            var expBuilder = new ExpressionBuilder();
+            var queryParameter = new QueryParameter<ModelExample.Account>(
+                memberName: $"{nameof(ModelExample.Account.BooksClosedDate)}",
+                @operator: ComparisonOperator.EqualTo,
+                paramValue: "1/1/2021");
+
+            Expression<Func<ModelExample.Account, bool>> observed = expBuilder.GetExpression(queryParameter);
+
+            IQueryable<ModelExample.Account> testAccounts = new List<ModelExample.Account>()
+            {
+                new()
+                {
+                    AccountId = 0,
+                    BooksClosedDate = null
+                },
+                new()
+                {
+                    AccountId = 1,
+                    BooksClosedDate = new DateTime(2021, 1, 1)
+                },
+            }.AsQueryable();
+
+            var exp = testAccounts.FirstOrDefault(observed);
+
+            Assert.AreEqual(1, exp.AccountId);
+        }
+
+        [TestMethod]
+        public void GetExpression_Account_NullableDateTimeProperty_NoValue_YieldsExpression()
+        {
+            var expBuilder = new ExpressionBuilder();
+            var queryParameter = new QueryParameter<ModelExample.Account>(
+                memberName: $"{nameof(ModelExample.Account.BooksClosedDate)}",
+                @operator: ComparisonOperator.IsNull,
+                paramValue: "1/1/2021");
+
+            Expression<Func<ModelExample.Account, bool>> observed = expBuilder.GetExpression(queryParameter);
+
+            IQueryable<ModelExample.Account> testAccounts = new List<ModelExample.Account>()
+            {
+                new()
+                {
+                    AccountId = 0,
+                    BooksClosedDate = null
+                },
+                new()
+                {
+                    AccountId = 1,
+                    BooksClosedDate = new DateTime(2021, 1, 1)
+                },
+            }.AsQueryable();
+
+            var exp = testAccounts.FirstOrDefault(observed);
+
+            Assert.AreEqual(0, exp.AccountId);
+        }
+
+        [TestMethod]
+        public void GetExpression_Account_DateTime_CustomDateTimeFormat_YieldsExpression()
+        {
+            var expBuilder = new ExpressionBuilder()
+            {
+                CustomDateTimeFormats = new string[]{ "MMddyyyy" }
+            };
+            var queryParameter = new QueryParameter<ModelExample.Account>(
+                memberName: $"{nameof(ModelExample.Account.BooksClosedDate)}",
+                @operator: ComparisonOperator.EqualTo,
+                paramValue: "01012021");
+
+            Expression<Func<ModelExample.Account, bool>> observed = expBuilder.GetExpression(queryParameter);
+
+            IQueryable<ModelExample.Account> testAccounts = new List<ModelExample.Account>()
+            {
+                new()
+                {
+                    AccountId = 0,
+                    BooksClosedDate = null
+                },
+                new()
+                {
+                    AccountId = 1,
+                    BooksClosedDate = new DateTime(2021, 1, 1)
+                },
+            }.AsQueryable();
+
+            var exp = testAccounts.FirstOrDefault(observed);
+
+            Assert.AreEqual(1, exp.AccountId);
+        }
+
+        [TestMethod]
+        public void GetExpression_Account_DateTime_UnsupportedFormat_ThrowsException()
+        {
+            var expBuilder = new ExpressionBuilder();
+
+            var queryParameter = new QueryParameter<ModelExample.Account>(
+                memberName: $"{nameof(ModelExample.Account.BooksClosedDate)}",
+                @operator: ComparisonOperator.EqualTo,
+                paramValue: "01012021");
+
+            Assert.ThrowsException<Exceptions.ParseException>(() => expBuilder.GetExpression(queryParameter));
+        }
     }
 }
