@@ -157,7 +157,7 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
         {
             var expBuilder = new ExpressionBuilder();
             var queryParameter = new QueryParameter<ModelExample.Account>(
-                memberName: $"{nameof(ModelExample.Account.AccountNavigation)}.{nameof(ModelExample.AccountObject.AccountObjectCode)}",
+                qualifiedMemberName: $"{nameof(ModelExample.Account.AccountNavigation)}.{nameof(ModelExample.AccountObject.AccountObjectCode)}",
                 @operator: ComparisonOperator.EqualTo,
                 paramValue: "Test");
 
@@ -187,7 +187,7 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
         {
             var expBuilder = new ExpressionBuilder();
             var queryParameter = new QueryParameter<ModelExample.Account>(
-                memberName: $"{nameof(ModelExample.Account.BooksClosedDate)}",
+                qualifiedMemberName: $"{nameof(ModelExample.Account.BooksClosedDate)}",
                 @operator: ComparisonOperator.EqualTo,
                 paramValue: "1/1/2021");
 
@@ -217,7 +217,7 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
         {
             var expBuilder = new ExpressionBuilder();
             var queryParameter = new QueryParameter<ModelExample.Account>(
-                memberName: $"{nameof(ModelExample.Account.BooksClosedDate)}",
+                qualifiedMemberName: $"{nameof(ModelExample.Account.BooksClosedDate)}",
                 @operator: ComparisonOperator.IsNull,
                 paramValue: "1/1/2021");
 
@@ -250,7 +250,7 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
                 CustomDateTimeFormats = new string[]{ "MMddyyyy" }
             };
             var queryParameter = new QueryParameter<ModelExample.Account>(
-                memberName: $"{nameof(ModelExample.Account.BooksClosedDate)}",
+                qualifiedMemberName: $"{nameof(ModelExample.Account.BooksClosedDate)}",
                 @operator: ComparisonOperator.EqualTo,
                 paramValue: "01012021");
 
@@ -281,7 +281,7 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
             var expBuilder = new ExpressionBuilder();
 
             var queryParameter = new QueryParameter<ModelExample.Account>(
-                memberName: $"{nameof(ModelExample.Account.BooksClosedDate)}",
+                qualifiedMemberName: $"{nameof(ModelExample.Account.BooksClosedDate)}",
                 @operator: ComparisonOperator.EqualTo,
                 paramValue: "01012021");
 
@@ -298,7 +298,7 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
                 .FirstOrDefault();
 
             var parameter = expBuilder.CreateQueryParameter<ModelExample.Account>(
-                memberName: accountNumberSearchableInfo,
+                searchMemberMetadata: accountNumberSearchableInfo,
                 @operator: ComparisonOperator.EqualTo,
                 "TestAccountNumber");
 
@@ -319,7 +319,7 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
                 .FirstOrDefault();
 
             var parameter = expBuilder.CreateQueryParameter<ModelExample.Account>(
-                memberName: propertySearchInfo,
+                searchMemberMetadata: propertySearchInfo,
                 @operator: ComparisonOperator.EqualTo,
                 "StartDate");
 

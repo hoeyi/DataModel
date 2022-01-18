@@ -20,11 +20,11 @@ namespace Ichosoft.DataModel.Expressions
         /// Creates a new <see cref="IQueryParameter{TModel}"/> instance from the given inputs.
         /// </summary>
         /// <typeparam name="TModel">The type being searched.</typeparam>
-        /// <param name="memberName">The member used in the search.</param>
-        /// <param name="operator">The operator for the search.</param>
+        /// <param name="memberMetadata">The member metadata to use in the search.</param>
+        /// <param name="operator">The operator to use in the search.</param>
         /// <param name="paramValue">The string representation of the parameter value.</param>
         /// <returns>An <see cref="IQueryParameter{TModel}"/> from the inputs.</returns>
-        IQueryParameter<TModel> CreateQueryParameter<TModel>(ISearchableMemberMetadata memberName, ComparisonOperator @operator, string paramValue);
+        IQueryParameter<TModel> CreateQueryParameter<TModel>(ISearchableMemberMetadata memberMetadata, ComparisonOperator @operator, string paramValue);
 
         /// <summary>
         /// Creates a reference collection of supported comparison operators.

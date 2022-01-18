@@ -21,9 +21,9 @@ namespace Ichosoft.DataModel.Expressions
 
         /// <inheritdoc/>
         public IQueryParameter<TModel> CreateQueryParameter<TModel>(
-            ISearchableMemberMetadata memberName, ComparisonOperator @operator, string paramValue)
+            ISearchableMemberMetadata searchMemberMetadata, ComparisonOperator @operator, string paramValue)
         {
-            return new QueryParameter<TModel>(memberName.QualifiedMemberName, @operator, paramValue);
+            return new QueryParameter<TModel>(searchMemberMetadata, @operator, paramValue);
         }
 
         /// <inheritdoc/>
