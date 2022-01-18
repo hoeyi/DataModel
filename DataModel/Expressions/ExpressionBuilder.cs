@@ -107,13 +107,6 @@ namespace Ichosoft.DataModel.Expressions
             };
 
             return Expression.Lambda<Func<TModel, bool>>(expression, parameterExpression);
-            //try
-            //{
-            //}
-            //catch(Exception e)
-            //{
-            //    throw new Exceptions.ParseException(message: ExceptionString.Expression_General, e);
-            //}
         }
 
         /// <inheritdoc/>

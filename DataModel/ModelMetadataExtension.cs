@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace Ichosoft.DataModel
 {
@@ -68,10 +69,10 @@ namespace Ichosoft.DataModel
         /// <param name="type"></param>
         /// <param name="memberName"></param>
         /// <returns>The member display text, if defined, else 
-        /// {<see cref="Type.Name"/>.<paramref name="memberName"/>} as an interpolated
+        /// {<paramref name="type"></paramref>.Name}.{<paramref name="memberName"/>} as an interpolated
         /// <see cref="string"/>.</returns>
         public static string NameFor(this Type type, string memberName)
-        {
+        {   
             return metadataService?.GroupNameFor(type, memberName);
         }
 
@@ -80,7 +81,7 @@ namespace Ichosoft.DataModel
         /// </summary>
         /// <param name="type">The declaring type.</param>
         /// <param name="memberName">The member name.</param>
-        /// <returns>The member order, if defined, else default <see cref="int?"/>.</returns>
+        /// <returns>The member order, if defined, else default <see cref="int"/>?.</returns>
         public static int? OrderFor(this Type type, string memberName)
         {
             return metadataService?.OrderFor(type, memberName);
