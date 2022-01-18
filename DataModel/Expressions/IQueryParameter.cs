@@ -3,9 +3,9 @@
 namespace Ichosoft.DataModel.Expressions
 {
     /// <summary>
-    /// Reprsents a paramter used to filter search results.
+    /// Represents a paramter used to filter search results.
     /// </summary>
-    /// <typeparam name="T">The member type to be evaluated.</typeparam>
+    /// <typeparam name="TModel">The member type to be evaluated.</typeparam>
     public interface IQueryParameter<TModel>
     {
         /// <summary>

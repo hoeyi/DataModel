@@ -287,5 +287,46 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
 
             Assert.ThrowsException<Exceptions.ParseException>(() => expBuilder.GetExpression(queryParameter));
         }
+
+        [TestMethod]
+        public void CreateQueryParameter_Account_ValidInputs_YieldsInstance()
+        {
+            ExpressionBuilder expBuilder = new();
+
+            var accountNumberSearchableInfo = expBuilder.GetSearchableMembers<ModelExample.Account>()
+                .Where(m => m.QualifiedMemberName == nameof(ModelExample.Account.AccountNumber))
+                .FirstOrDefault();
+
+            var parameter = expBuilder.CreateQueryParameter<ModelExample.Account>(
+                memberName: accountNumberSearchableInfo,
+                @operator: ComparisonOperator.EqualTo,
+                "TestAccountNumber");
+
+            Assert.IsInstanceOfType(parameter, typeof(IQueryParameter<ModelExample.Account>));
+            Assert.AreEqual(nameof(ModelExample.Account.AccountNumber), parameter.MemberName);
+        }
+
+        [TestMethod]
+        public void CreateQueryParameter_AccountWithNestedProperty_ValidInputs_YieldsInstance()
+        {
+            ExpressionBuilder expBuilder = new();
+
+            var propertySearchableInfos = expBuilder.GetSearchableMembers<ModelExample.Account>();
+
+            var propertySearchInfo = propertySearchableInfos
+                .Where(m => m.QualifiedMemberName ==
+                    $"{nameof(ModelExample.Account.AccountNavigation)}.{nameof(ModelExample.AccountObject.AccountObjectCode)}")
+                .FirstOrDefault();
+
+            var parameter = expBuilder.CreateQueryParameter<ModelExample.Account>(
+                memberName: propertySearchInfo,
+                @operator: ComparisonOperator.EqualTo,
+                "StartDate");
+
+            Assert.IsInstanceOfType(parameter, typeof(IQueryParameter<ModelExample.Account>));
+            Assert.AreEqual(
+                $"{nameof(ModelExample.Account.AccountNavigation)}.{nameof(ModelExample.AccountObject.AccountObjectCode)}", 
+                parameter.MemberName);
+        }
     }
 }

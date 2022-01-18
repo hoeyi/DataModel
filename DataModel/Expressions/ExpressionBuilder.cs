@@ -20,6 +20,13 @@ namespace Ichosoft.DataModel.Expressions
         public string[] CustomDateTimeFormats { get; set; } = Array.Empty<string>();
 
         /// <inheritdoc/>
+        public IQueryParameter<TModel> CreateQueryParameter<TModel>(
+            ISearchableMemberMetadata memberName, ComparisonOperator @operator, string paramValue)
+        {
+            return new QueryParameter<TModel>(memberName.QualifiedMemberName, @operator, paramValue);
+        }
+
+        /// <inheritdoc/>
         public IList<ComparisonOperator> GetComparisonOperators()
         {
             var members = Enum.GetValues(typeof(ComparisonOperator))

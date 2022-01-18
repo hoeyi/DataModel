@@ -2,8 +2,18 @@
 
 namespace Ichosoft.DataModel.Expressions
 {
-    public class QueryParameter<TModel> : IQueryParameter<TModel>
+    /// <summary>
+    /// Reprsents a paramter used to filter search results.
+    /// </summary>
+    /// <typeparam name="TModel">The member type to be evaluated.</typeparam>
+    class QueryParameter<TModel> : IQueryParameter<TModel>
     {
+        /// <summary>
+        /// Returns a 
+        /// </summary>
+        /// <param name="memberName"></param>
+        /// <param name="operator"></param>
+        /// <param name="paramValue"></param>
         public QueryParameter(string memberName, ComparisonOperator @operator, string paramValue)
         {
             if (string.IsNullOrEmpty(memberName))

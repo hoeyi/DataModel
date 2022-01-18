@@ -7,15 +7,13 @@ namespace Ichosoft.DataModel.Exceptions
     /// </summary>
     public class ParseException : Exception
     {
-        public ParseException() : base()
-        {
-        }
-
-        public ParseException(string message) : base(message)
-        {
-        }
-
-        public ParseException(string message, Exception innerException) : base(message, innerException)
+        /// <summary>
+        /// Creates a new instance of <see cref="ParseException"/>.
+        /// </summary>
+        /// <param name="message">The error message to describe the new exception.</param>
+        /// <param name="innerException">The preceding exception to the new exception.</param>
+        public ParseException(string message, Exception innerException) 
+            : base(message, innerException)
         {
         }
     }

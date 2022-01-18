@@ -52,8 +52,7 @@ namespace Ichosoft.DataModel
         /// <param name="type"></param>
         /// <param name="memberName"></param>
         /// <returns>The member display text, if defined, else 
-        /// {<see cref="Type.Name"/>.<paramref name="memberName"/>} as an interpolated
-        /// <see cref="string"/>.</returns>
+        /// {typeof(TModel).Name}.{memberName} as an interpolated <see cref="string"/>.</returns>
         string NameFor(Type type, string memberName);
 
         /// <summary>
@@ -61,7 +60,7 @@ namespace Ichosoft.DataModel
         /// </summary>
         /// <param name="type">The declaring type.</param>
         /// <param name="memberName">The member name.</param>
-        /// <returns>The member order, if defined, else default <see cref="int?"/>.</returns>
+        /// <returns>The member order, if defined, else null.</returns>
         int? OrderFor(Type type, string memberName);
 
         /// <summary>
@@ -102,8 +101,7 @@ namespace Ichosoft.DataModel
         /// <typeparam name="TModel">The declaring type.</typeparam>
         /// <param name="memberName">The member name.</param>
         /// <returns>The member display text, if defined, else 
-        /// {<see cref="Type.Name"/>.<paramref name="memberName"/>} as an interpolated
-        /// <see cref="string"/>.</returns>
+        /// {typeof(TModel).Name}.{memberName} as an interpolated <see cref="string"/>.</returns>
         string NameFor<TModel>(string memberName);
 
         /// <summary>
@@ -111,7 +109,7 @@ namespace Ichosoft.DataModel
         /// </summary>
         /// <typeparam name="TModel">The declaring type.</typeparam>
         /// <param name="memberName">The member name.</param>
-        /// <returns>The member order, if defined, else default <see cref="int?"/>.</returns>
+        /// <returns>The member order, if defined, else null.</returns>
         int? OrderFor<TModel>(string memberName);
 
         /// <summary>

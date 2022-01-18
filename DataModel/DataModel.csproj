@@ -10,7 +10,7 @@
       <PackageId>Ichosoft.DataModel</PackageId>
       <BuildNumber Condition="$(BuildNumber) == ''">0</BuildNumber>
       <!--Comment out build number to avoid auto-updating project build properties. Uncomment for release builds only.-->
-      <!--<BuildNumber>$([System.DateTime]::UtcNow.ToString(mmff))</BuildNumber>-->
+      <BuildNumber>$([System.DateTime]::UtcNow.ToString(mmff))</BuildNumber>
       <VersionPrefix>2.1.1</VersionPrefix>
       <Version>$(VersionPrefix).$(BuildNumber)</Version>
       <Description>A .NET library for building expressions dynamically.</Description>

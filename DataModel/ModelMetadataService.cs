@@ -5,6 +5,9 @@ using Ichosoft.DataModel.Annotations;
 
 namespace Ichosoft.DataModel
 {
+    /// <summary>
+    /// Provides methods for accessing object metadata.
+    /// </summary>
     public class ModelMetadataService : IModelMetadataService
     {
         #region Generic methods

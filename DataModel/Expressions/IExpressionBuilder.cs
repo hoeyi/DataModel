@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
@@ -14,11 +15,21 @@ namespace Ichosoft.DataModel.Expressions
         /// for converting string values to date-time objects.
         /// </summary>
         string[] CustomDateTimeFormats { get; set; }
-        
+
+        /// <summary>
+        /// Creates a new <see cref="IQueryParameter{TModel}"/> instance from the given inputs.
+        /// </summary>
+        /// <typeparam name="TModel">The type being searched.</typeparam>
+        /// <param name="memberName">The member used in the search.</param>
+        /// <param name="operator">The operator for the search.</param>
+        /// <param name="paramValue">The string representation of the parameter value.</param>
+        /// <returns>An <see cref="IQueryParameter{TModel}"/> from the inputs.</returns>
+        IQueryParameter<TModel> CreateQueryParameter<TModel>(ISearchableMemberMetadata memberName, ComparisonOperator @operator, string paramValue);
+
         /// <summary>
         /// Creates a reference collection of supported comparison operators.
         /// </summary>
-        /// <returns>An <see cref="IList"/> containing <see cref="ComparisonOperator"/>.</returns>
+        /// <returns>A collection of <see cref="ComparisonOperator"/> objects.</returns>
         IList<ComparisonOperator> GetComparisonOperators();
 
         /// <summary>
@@ -36,7 +47,7 @@ namespace Ichosoft.DataModel.Expressions
         /// of type <typeparamref name="T"/>.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <returns>A collection of <see cref="ISearchableMemberMetadata"/>.</returns>
+        /// <returns>A collection of <see cref="ISearchableMemberMetadata"/> objects.</returns>
         IList<ISearchableMemberMetadata> GetSearchableMembers<T>();
     }
 }
