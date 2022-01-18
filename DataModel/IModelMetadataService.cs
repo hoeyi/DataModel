@@ -1,5 +1,7 @@
 ﻿using System;
-using Ichosoft.DataModel.Annotations;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("Ichosoft.DataModel.UnitTest")]
 
 namespace Ichosoft.DataModel
 {

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Ichosoft.DataModel.Annotations;
 using Ichosoft.DataModel.Resources;
 using System.ComponentModel.DataAnnotations;
+using Ichosoft.Extensions.Common.Localization;
 
 namespace Ichosoft.DataModel.Expressions
 {
@@ -15,6 +16,9 @@ namespace Ichosoft.DataModel.Expressions
     /// </summary>
     public partial class ExpressionBuilder : IExpressionBuilder
     {
+        /// <inheritdoc/>
+        public string[] CustomDateTimeFormats { get; set; } = Array.Empty<string>();
+
         /// <inheritdoc/>
         public IList<ComparisonOperator> GetComparisonOperators()
         {
@@ -38,67 +42,78 @@ namespace Ichosoft.DataModel.Expressions
             Expression expressionLeft = Expression.Property(parameterExpression, propertyName: outerPropertyInfo.Name);
             Expression expressionRight;
 
-            // Handle direct class member scenario.
-            if(memberInfo.Length == 1)
-            {
-                // Check query parameter information is supported.
-                ValidateOrThrow(queryParameter.Operator, outerPropertyInfo);
-
-                // Build right-hand side with the search value.
-                expressionRight = queryParameter.Operator == ComparisonOperator.IsNull || queryParameter.Operator == ComparisonOperator.IsNotNull ?
-                    Expression.Constant(null) : ParseSearchConstant(value: queryParameter.Value, type: outerPropertyInfo.PropertyType);
-
-                // Conver the right-hand side to the appropriate type. Handles support for nullable property types.
-                expressionRight = Expression.Convert(expressionRight, type: outerPropertyInfo.PropertyType);
-            }
-
-            // Handles single-level nested class member scenario.
-            else if(memberInfo.Length == 2)
-            {
-                PropertyInfo innerPropertyInfo = outerPropertyInfo.PropertyType.GetProperty(memberInfo[1]);
-
-                // Check query parameter information is supported.
-                ValidateOrThrow(queryParameter.Operator, innerPropertyInfo);
-
-                // Add the inner property to the left-hand side of the expression.
-                expressionLeft = Expression.Property(expressionLeft, propertyName: innerPropertyInfo.Name);
-
-                // Build right-hand side with the search value.
-                expressionRight = queryParameter.Operator == ComparisonOperator.IsNull || queryParameter.Operator == ComparisonOperator.IsNotNull ?
-                    Expression.Constant(null) : ParseSearchConstant(value: queryParameter.Value, type: innerPropertyInfo.PropertyType);
-
-                // Conver the right-hand side to the appropriate type. Handles support for nullable property types.
-                expressionRight = Expression.Convert(expressionRight, type: innerPropertyInfo.PropertyType);
-            }
-            else
-            {
-                throw new NotSupportedException(message: ExceptionString.Expression_NestingNotSupported);
-            }
-
             try
             {
-                // Combine the left- and right-hand sides with the appropriate method.
-                Expression expression = queryParameter.Operator switch
+                // Handle direct class member scenario.
+                if(memberInfo.Length == 1)
                 {
-                    ComparisonOperator.EqualTo => Expression.Equal(expressionLeft, expressionRight),
-                    ComparisonOperator.NotEqualTo => Expression.NotEqual(expressionLeft, expressionRight),
-                    ComparisonOperator.GreaterThan => Expression.GreaterThan(expressionLeft, expressionRight),
-                    ComparisonOperator.GreaterThanOrEqualTo => Expression.GreaterThanOrEqual(expressionLeft, expressionRight),
-                    ComparisonOperator.LessThan => Expression.LessThan(expressionLeft, expressionRight),
-                    ComparisonOperator.LessThanOrEqualTo => Expression.LessThanOrEqual(expressionLeft, expressionRight),
-                    ComparisonOperator.Contains => Expression.Call(expressionLeft, nameof(string.Contains), null, expressionRight),
-                    ComparisonOperator.IsNull => Expression.Equal(expressionLeft, expressionRight),
-                    ComparisonOperator.IsNotNull => Expression.NotEqual(expressionLeft, expressionRight),
+                    // Check query parameter information is supported.
+                    ValidateOrThrow(queryParameter.Operator, outerPropertyInfo);
 
-                    _ => throw new InvalidOperationException(),
-                };
+                    // Build right-hand side with the search value.
+                    expressionRight = queryParameter.Operator == ComparisonOperator.IsNull || queryParameter.Operator == ComparisonOperator.IsNotNull ?
+                        Expression.Constant(null) : ParseSearchConstant(value: queryParameter.Value, type: outerPropertyInfo.PropertyType);
 
-                return Expression.Lambda<Func<TModel, bool>>(expression, parameterExpression);
+                    // Conver the right-hand side to the appropriate type. Handles support for nullable property types.
+                    expressionRight = Expression.Convert(expressionRight, type: outerPropertyInfo.PropertyType);
+                }
+
+                // Handles single-level nested class member scenario.
+                else if(memberInfo.Length == 2)
+                {
+                    PropertyInfo innerPropertyInfo = outerPropertyInfo.PropertyType.GetProperty(memberInfo[1]);
+
+                    // Check query parameter information is supported.
+                    ValidateOrThrow(queryParameter.Operator, innerPropertyInfo);
+
+                    // Add the inner property to the left-hand side of the expression.
+                    expressionLeft = Expression.Property(expressionLeft, propertyName: innerPropertyInfo.Name);
+
+                    // Build right-hand side with the search value.
+                    expressionRight = queryParameter.Operator == ComparisonOperator.IsNull || queryParameter.Operator == ComparisonOperator.IsNotNull ?
+                        Expression.Constant(null) : ParseSearchConstant(value: queryParameter.Value, type: innerPropertyInfo.PropertyType);
+
+                    // Conver the right-hand side to the appropriate type. Handles support for nullable property types.
+                    expressionRight = Expression.Convert(expressionRight, type: innerPropertyInfo.PropertyType);
+                }
+                else
+                {
+                    throw new NotSupportedException(message: ExceptionString.Expression_NestingNotSupported);
+                }
+            }
+            catch(NotSupportedException)
+            {
+                throw;
             }
             catch(Exception e)
             {
                 throw new Exceptions.ParseException(message: ExceptionString.Expression_General, e);
             }
+
+            // Combine the left- and right-hand sides with the appropriate method.
+            Expression expression = queryParameter.Operator switch
+            {
+                ComparisonOperator.EqualTo => Expression.Equal(expressionLeft, expressionRight),
+                ComparisonOperator.NotEqualTo => Expression.NotEqual(expressionLeft, expressionRight),
+                ComparisonOperator.GreaterThan => Expression.GreaterThan(expressionLeft, expressionRight),
+                ComparisonOperator.GreaterThanOrEqualTo => Expression.GreaterThanOrEqual(expressionLeft, expressionRight),
+                ComparisonOperator.LessThan => Expression.LessThan(expressionLeft, expressionRight),
+                ComparisonOperator.LessThanOrEqualTo => Expression.LessThanOrEqual(expressionLeft, expressionRight),
+                ComparisonOperator.Contains => Expression.Call(expressionLeft, nameof(string.Contains), null, expressionRight),
+                ComparisonOperator.IsNull => Expression.Equal(expressionLeft, expressionRight),
+                ComparisonOperator.IsNotNull => Expression.NotEqual(expressionLeft, expressionRight),
+
+                _ => throw new InvalidOperationException(),
+            };
+
+            return Expression.Lambda<Func<TModel, bool>>(expression, parameterExpression);
+            //try
+            //{
+            //}
+            //catch(Exception e)
+            //{
+            //    throw new Exceptions.ParseException(message: ExceptionString.Expression_General, e);
+            //}
         }
 
         /// <inheritdoc/>
@@ -162,7 +177,7 @@ namespace Ichosoft.DataModel.Expressions
         /// <param name="value">The string representation the constant value.</param>
         /// <param name="type">The type to which the <paramref name="value"/> will be converted.</param>
         /// <returns>A <see cref="ConstantExpression"/> representing the right-hand side of a comparison.</returns>
-        private static ConstantExpression ParseSearchConstant(string value, Type type)
+        private ConstantExpression ParseSearchConstant(string value, Type type)
         {
             // Adjust the parameter type for nullable data types.
             var parameterType = Nullable.GetUnderlyingType(type) ?? type;
@@ -171,7 +186,7 @@ namespace Ichosoft.DataModel.Expressions
             {
                 "System.String" => Expression.Constant(value: value, type: parameterType),
                 "System.Boolean" => Expression.Constant(value: Convert.ToBoolean(value), type: parameterType),
-                "System.DateTime" => Expression.Constant(value: Converter.TryParseDateTime(value.ToString()), type: parameterType),
+                "System.DateTime" => Expression.Constant(value: value.ConvertToDateTime(CustomDateTimeFormats), type: parameterType),
                 _ => throw new InvalidOperationException()
             };
         }

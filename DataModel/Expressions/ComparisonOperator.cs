@@ -5,7 +5,7 @@ using Ichosoft.DataModel.Resources;
 namespace Ichosoft.DataModel.Expressions
 {
     /// <summary>
-    /// Represents a operator that compares two operands.
+    /// Represents an operator that compares two operands.
     /// </summary>
     public enum ComparisonOperator
     {

@@ -10,6 +10,12 @@ namespace Ichosoft.DataModel.Expressions
     public interface IExpressionBuilder
     {
         /// <summary>
+        /// Gets or sets the additional custom date-time formats used by this <see cref="IExpressionBuilder"/> 
+        /// for converting string values to date-time objects.
+        /// </summary>
+        string[] CustomDateTimeFormats { get; set; }
+        
+        /// <summary>
         /// Creates a reference collection of supported comparison operators.
         /// </summary>
         /// <returns>An <see cref="IList"/> containing <see cref="ComparisonOperator"/>.</returns>

@@ -1,17 +1,13 @@
 # Ichosoft.DataModel #
-This library contains class and methods for supporting a model utilizing data annotations for metadata support.
+This library contains class and methods for supporting a model using data annotations to record metadata.
 
 * [Building Project](#building-prjoject)
 * [Public API](#api)
 
 Be sure to read the [guidelines for contributing](CONTRIBUTING.md) to this project.
 
-<br/>
-
 ## Building Project ##
 By default, the project `$(BuildNumber)` property is set to zero. Uncomment the line `Extensions.Configuration.csproj` to allow auto-assignment of the build number. Once the build is complete, revert the change to the `$(BuilderNumber)` property assignment.
-
-<br/>
 
 ## API ##
 This library maintains the following API for consumption:
@@ -29,17 +25,12 @@ This library maintains the following API for consumption:
 * [IQueryParameter](#IQueryParameter)
 * [ISearchableMemberMetadata](#ISearchableMemberMetadata)
 
-
 ### DataModel 
 #### IModelMetadataService ####
-`IModelMetadataService` provides helper methods for accessing model metadata. This interface supports string localization using `DisplayAttribute` or similar.
-
-[Details](\DataModel\IModelMetadataService.cs)
+`IModelMetadataService` provides helper methods for accessing model metadata. This interface supports string localization using `DisplayAttribute` or similar. ([source](\DataModel\IModelMetadataService.cs))
 
 #### ModelMetadataExtension ####
-`ModelMetadataExtensions` provides extension methods for use with `Type` objects to retrieve metadata elements from member attributes.
-
-[Details](\DataModel\ModelMetadataExtension.cs)
+`ModelMetadataExtensions` provides extension methods for use with `Type` objects to retrieve metadata elements from member attributes. ([source](\DataModel\ModelMetadataExtension.cs))
 ###
 
 ---
@@ -48,14 +39,10 @@ This library maintains the following API for consumption:
 Provides helper methods for working with `System.ComponentModel.DataAnnotations`.
 
 #### NounAttribute ####
-`NounAttribute` describes the singular and plural forms and articles of a noun.
-
-[Details](\DataModel\Annotations\NounAttribute.cs)
+`NounAttribute` describes the singular and plural forms and articles of a noun. ([source](\DataModel\Annotations\NounAttribute.cs))
 
 #### SearchableAttribute ####
-`SearchableAttribute` signals that a member can be passed to `Expressions.IExpressionBuilder`
-
-[Details](\DataModel\Annotations\SearchableAttribute.cs)
+`SearchableAttribute` signals that a member can be passed to `Expressions.IExpressionBuilder`. ([source](\DataModel\Annotations\SearchableAttribute.cs))
 ###
 
 ---
@@ -64,18 +51,12 @@ Provides helper methods for working with `System.ComponentModel.DataAnnotations`
 Supports generation of queries dynamically.
 
 #### IExpressionBuilder ####
-`IExpressionBuilder` provides generic methods used for building query expressions dynamically.
-
-[Details](\DataModel\Expressions\IExpressionBuilder.cs)
+`IExpressionBuilder` provides generic methods used for building query expressions dynamically. ([source](\DataModel\Expressions\IExpressionBuilder.cs))
 
 #### IQueryParameter ####
-`IQueryParameter` represents part of a search expression used to construct a valid left-hand side of an equation.
-
-[Details](\DataModel\Expressions\IQueryParameter.cs)
+`IQueryParameter` represents part of a search expression used to construct a valid left-hand side of an equation. ([source](\DataModel\Expressions\IQueryParameter.cs))
 
 #### ISearchableMemberMetadata ####
-`ISearchableMemberMetadata` represents a class member that is supported for building search expressions dynamically.
-
-[Details](\DataModel\Expressions\ISearchableMemberMetadata.cs)
+`ISearchableMemberMetadata` represents a class member that is supported for building search expressions dynamically. ([source](\DataModel\Expressions\ISearchableMemberMetadata.cs))
 
 ###
