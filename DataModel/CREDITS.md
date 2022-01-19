@@ -5,7 +5,7 @@ This project uses some libraries written by others. Credits for each referenced 
 ### Ichosoft.Extensions.Common ###
 https://github.com/Ichosoft/Extensions.Common
 
-Ichosoft.Extensions.Common version 1.2.1
+Ichosoft.Extensions.Common version 1.3.0
 
 MIT License
 
