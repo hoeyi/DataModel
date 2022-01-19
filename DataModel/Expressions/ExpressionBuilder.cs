@@ -174,7 +174,7 @@ namespace Ichosoft.DataModel.Expressions
         /// <summary>
         /// Creates a constant (RHS) expression given a string and expected type.
         /// </summary>
-        /// <param name="value">The string representation the constant value.</param>
+        /// <param name="value">The string representation of the constant value.</param>
         /// <param name="type">The type to which the <paramref name="value"/> will be converted.</param>
         /// <returns>A <see cref="ConstantExpression"/> representing the right-hand side of a comparison.</returns>
         private ConstantExpression ParseSearchConstant(string value, Type type)
