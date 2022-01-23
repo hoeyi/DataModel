@@ -18,8 +18,8 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
         [TestMethod]
         public void GetExpression_BooleanParameter_ReturnsInstance()
         {
-            var expBuilder = new ExpressionBuilder();
-            var observed = expBuilder.GetExpression(
+            ExpressionBuilder expBuilder = new ExpressionBuilder();
+            Expression<Func<ModelExample.Account, bool>> observed = expBuilder.GetExpression(
                 new QueryParameter<ModelExample.Account>(
                     nameof(ModelExample.Account.IsComplianceTradable),
                     ComparisonOperator.EqualTo,
@@ -27,7 +27,7 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
 
             Assert.IsInstanceOfType(observed, typeof(Expression<Func<ModelExample.Account, bool>>));
 
-            var testAccounts = new List<ModelExample.Account>()
+            List<ModelExample.Account> testAccounts = new List<ModelExample.Account>()
             {
                 new ModelExample.Account()
                 {
@@ -44,15 +44,15 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
         [TestMethod]
         public void GetComparisonOperators_ReturnsExpectedList()
         {
-            var expBuilder = new ExpressionBuilder();
-            var res = expBuilder.GetComparisonOperators();
+            ExpressionBuilder expBuilder = new ExpressionBuilder();
+            IList<ComparisonOperator> res = expBuilder.GetComparisonOperators();
 
-            var rm = new ResourceManager(typeof(DataModel.Resources.ComparisonOperatorString));
+            ResourceManager rm = new ResourceManager(typeof(DataModel.Resources.ComparisonOperatorString));
             string observed;
             string expected;
-            
-            var type = typeof(ComparisonOperator);
-            foreach(var r in res)
+
+            Type type = typeof(ComparisonOperator);
+            foreach(ComparisonOperator r in res)
             {
                 observed = type.GetMember(memberName: $"{r}")?.GetAttribute<DisplayAttribute>()?.GetName();
                 expected = rm.GetString($"{r}");
@@ -64,8 +64,8 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
         [TestMethod]
         public void GetSearchableMembers_ClassWithoutMetadata_ReturnsExpectedList()
         {
-            var expBuilder = new ExpressionBuilder();
-            var res = expBuilder.GetSearchableMembers<ModelExample.Account>();
+            ExpressionBuilder expBuilder = new ExpressionBuilder();
+            IList<ISearchableMemberMetadata> res = expBuilder.GetSearchableMembers<ModelExample.Account>();
 
             SearchableMemberMetadata[] expectedArray = new SearchableMemberMetadata[]
             {
@@ -109,8 +109,8 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
         [TestMethod]
         public void GetSearchableMembers_ClassWithMetadata_ReturnsExpectedList()
         {
-            var expBuilder = new ExpressionBuilder();
-            var res = expBuilder.GetSearchableMembers<ModelMetadataExample.Account>();
+            ExpressionBuilder expBuilder = new ExpressionBuilder();
+            IList<ISearchableMemberMetadata> res = expBuilder.GetSearchableMembers<ModelMetadataExample.Account>();
 
             SearchableMemberMetadata[] expectedArray = new SearchableMemberMetadata[]
             {
@@ -155,8 +155,8 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
         [TestMethod]
         public void GetExpression_Account_AccountObjectCode_EqualsString_YieldsExpression()
         {
-            var expBuilder = new ExpressionBuilder();
-            var queryParameter = new QueryParameter<ModelExample.Account>(
+            ExpressionBuilder expBuilder = new ExpressionBuilder();
+            QueryParameter<ModelExample.Account> queryParameter = new QueryParameter<ModelExample.Account>(
                 qualifiedMemberName: $"{nameof(ModelExample.Account.AccountNavigation)}.{nameof(ModelExample.AccountObject.AccountObjectCode)}",
                 @operator: ComparisonOperator.EqualTo,
                 paramValue: "Test");
@@ -177,7 +177,7 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
                 },
             }.AsQueryable();
 
-            var exp = testAccounts.FirstOrDefault(observed);
+            ModelExample.Account exp = testAccounts.FirstOrDefault(observed);
 
             Assert.AreEqual(1, exp.AccountId);
         }
@@ -185,8 +185,8 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
         [TestMethod]
         public void GetExpression_Account_NullableDateTimeProperty_HasValue_YieldsExpression()
         {
-            var expBuilder = new ExpressionBuilder();
-            var queryParameter = new QueryParameter<ModelExample.Account>(
+            ExpressionBuilder expBuilder = new ExpressionBuilder();
+            QueryParameter<ModelExample.Account> queryParameter = new QueryParameter<ModelExample.Account>(
                 qualifiedMemberName: $"{nameof(ModelExample.Account.BooksClosedDate)}",
                 @operator: ComparisonOperator.EqualTo,
                 paramValue: "1/1/2021");
@@ -207,7 +207,7 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
                 },
             }.AsQueryable();
 
-            var exp = testAccounts.FirstOrDefault(observed);
+            ModelExample.Account exp = testAccounts.FirstOrDefault(observed);
 
             Assert.AreEqual(1, exp.AccountId);
         }
@@ -215,8 +215,8 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
         [TestMethod]
         public void GetExpression_Account_NullableDateTimeProperty_NoValue_YieldsExpression()
         {
-            var expBuilder = new ExpressionBuilder();
-            var queryParameter = new QueryParameter<ModelExample.Account>(
+            ExpressionBuilder expBuilder = new ExpressionBuilder();
+            QueryParameter<ModelExample.Account> queryParameter = new QueryParameter<ModelExample.Account>(
                 qualifiedMemberName: $"{nameof(ModelExample.Account.BooksClosedDate)}",
                 @operator: ComparisonOperator.IsNull,
                 paramValue: "1/1/2021");
@@ -237,7 +237,7 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
                 },
             }.AsQueryable();
 
-            var exp = testAccounts.FirstOrDefault(observed);
+            ModelExample.Account exp = testAccounts.FirstOrDefault(observed);
 
             Assert.AreEqual(0, exp.AccountId);
         }
@@ -245,11 +245,11 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
         [TestMethod]
         public void GetExpression_Account_DateTime_CustomDateTimeFormat_YieldsExpression()
         {
-            var expBuilder = new ExpressionBuilder()
+            ExpressionBuilder expBuilder = new ExpressionBuilder()
             {
                 CustomDateTimeFormats = new string[]{ "MMddyyyy" }
             };
-            var queryParameter = new QueryParameter<ModelExample.Account>(
+            QueryParameter<ModelExample.Account> queryParameter = new QueryParameter<ModelExample.Account>(
                 qualifiedMemberName: $"{nameof(ModelExample.Account.BooksClosedDate)}",
                 @operator: ComparisonOperator.EqualTo,
                 paramValue: "01012021");
@@ -270,7 +270,7 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
                 },
             }.AsQueryable();
 
-            var exp = testAccounts.FirstOrDefault(observed);
+            ModelExample.Account exp = testAccounts.FirstOrDefault(observed);
 
             Assert.AreEqual(1, exp.AccountId);
         }
@@ -278,9 +278,9 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
         [TestMethod]
         public void GetExpression_Account_DateTime_UnsupportedFormat_ThrowsException()
         {
-            var expBuilder = new ExpressionBuilder();
+            ExpressionBuilder expBuilder = new ExpressionBuilder();
 
-            var queryParameter = new QueryParameter<ModelExample.Account>(
+            QueryParameter<ModelExample.Account> queryParameter = new QueryParameter<ModelExample.Account>(
                 qualifiedMemberName: $"{nameof(ModelExample.Account.BooksClosedDate)}",
                 @operator: ComparisonOperator.EqualTo,
                 paramValue: "01012021");
@@ -293,11 +293,11 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
         {
             ExpressionBuilder expBuilder = new();
 
-            var accountNumberSearchableInfo = expBuilder.GetSearchableMembers<ModelExample.Account>()
+            ISearchableMemberMetadata accountNumberSearchableInfo = expBuilder.GetSearchableMembers<ModelExample.Account>()
                 .Where(m => m.QualifiedMemberName == nameof(ModelExample.Account.AccountNumber))
                 .FirstOrDefault();
 
-            var parameter = expBuilder.CreateQueryParameter<ModelExample.Account>(
+            IQueryParameter<ModelExample.Account> parameter = expBuilder.CreateQueryParameter<ModelExample.Account>(
                 searchMemberMetadata: accountNumberSearchableInfo,
                 @operator: ComparisonOperator.EqualTo,
                 "TestAccountNumber");
@@ -311,14 +311,14 @@ namespace Ichosoft.DataModel.UnitTest.TestExpressions
         {
             ExpressionBuilder expBuilder = new();
 
-            var propertySearchableInfos = expBuilder.GetSearchableMembers<ModelExample.Account>();
+            IList<ISearchableMemberMetadata> propertySearchableInfos = expBuilder.GetSearchableMembers<ModelExample.Account>();
 
-            var propertySearchInfo = propertySearchableInfos
+            ISearchableMemberMetadata propertySearchInfo = propertySearchableInfos
                 .Where(m => m.QualifiedMemberName ==
                     $"{nameof(ModelExample.Account.AccountNavigation)}.{nameof(ModelExample.AccountObject.AccountObjectCode)}")
                 .FirstOrDefault();
 
-            var parameter = expBuilder.CreateQueryParameter<ModelExample.Account>(
+            IQueryParameter<ModelExample.Account> parameter = expBuilder.CreateQueryParameter<ModelExample.Account>(
                 searchMemberMetadata: propertySearchInfo,
                 @operator: ComparisonOperator.EqualTo,
                 "StartDate");

@@ -70,6 +70,42 @@ namespace Ichosoft.DataModel.UnitTest.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to account numbers.
+        /// </summary>
+        public static string Account_AccountNumber_Plural {
+            get {
+                return ResourceManager.GetString("Account_AccountNumber_Plural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to the.
+        /// </summary>
+        public static string Account_AccountNumber_PluralArticle {
+            get {
+                return ResourceManager.GetString("Account_AccountNumber_PluralArticle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to account number.
+        /// </summary>
+        public static string Account_AccountNumber_Singular {
+            get {
+                return ResourceManager.GetString("Account_AccountNumber_Singular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to the.
+        /// </summary>
+        public static string Account_AccountNumber_SingularArticle {
+            get {
+                return ResourceManager.GetString("Account_AccountNumber_SingularArticle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to accounts.
         /// </summary>
         public static string Account_Plural {

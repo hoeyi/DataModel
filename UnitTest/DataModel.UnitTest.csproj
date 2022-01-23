@@ -30,21 +30,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>DataModelTestString.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\NounString.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>NounString.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Resources\DataModelTestString.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DataModelTestString.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\NounString.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>NounString.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

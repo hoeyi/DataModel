@@ -17,6 +17,13 @@ namespace Ichosoft.DataModel.UnitTest.ModelMetadataExample
         [Display(
             Name = nameof(DataModelTestString.Account_AccountNumber),
             ResourceType = typeof(DataModelTestString))]
+        [Noun(
+            Plural = nameof(DataModelTestString.Account_AccountNumber_Plural),
+            PluralArticle = nameof(DataModelTestString.Account_AccountNumber_PluralArticle),
+            Singular = nameof(DataModelTestString.Account_AccountNumber_Singular),
+            SingularArticle = nameof(DataModelTestString.Account_AccountNumber_SingularArticle),
+            ResourceType = typeof(DataModelTestString)
+        )]
         public string AccountNumber { get; set; }
 
 

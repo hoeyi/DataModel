@@ -16,7 +16,7 @@ namespace Ichosoft.DataModel.UnitTest
         [TestMethod]
         public void GetAttributeFor_Class_WithoutMetadata_YieldsMatchingInstance()
         {
-            var observed = metadataService.AttributeFor<NounAttribute>(typeof(ModelExample.Account));
+            NounAttribute observed = metadataService.AttributeFor<NounAttribute>(typeof(ModelExample.Account));
 
             Assert.AreEqual(DataModelTestString.Account_Plural, observed.GetPlural());
             Assert.AreEqual(DataModelTestString.Account_PluralArticle, observed.GetPluralArticle());
@@ -27,7 +27,7 @@ namespace Ichosoft.DataModel.UnitTest
         [TestMethod]
         public void GetAttributeFor_Class_WithMetadata_YieldsMatchingInstance()
         {
-            var observed = metadataService.AttributeFor<NounAttribute>(typeof(ModelMetadataExample.Account));
+            NounAttribute observed = metadataService.AttributeFor<NounAttribute>(typeof(ModelMetadataExample.Account));
 
             Assert.AreEqual(DataModelTestString.Account_Plural, observed.GetPlural());
             Assert.AreEqual(DataModelTestString.Account_PluralArticle, observed.GetPluralArticle());

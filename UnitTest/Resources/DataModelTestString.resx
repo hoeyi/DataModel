@@ -123,6 +123,18 @@
   <data name="Account_AccountNumber" xml:space="preserve">
     <value>Account number</value>
   </data>
+  <data name="Account_AccountNumber_Plural" xml:space="preserve">
+    <value>account numbers</value>
+  </data>
+  <data name="Account_AccountNumber_PluralArticle" xml:space="preserve">
+    <value>the</value>
+  </data>
+  <data name="Account_AccountNumber_Singular" xml:space="preserve">
+    <value>account number</value>
+  </data>
+  <data name="Account_AccountNumber_SingularArticle" xml:space="preserve">
+    <value>the</value>
+  </data>
   <data name="Account_Plural" xml:space="preserve">
     <value>accounts</value>
   </data>

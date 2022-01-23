@@ -13,26 +13,60 @@ namespace Ichosoft.DataModel.UnitTest.TestAnnotations
     public class NounAttributeTests
     {
         [TestMethod]
-        public void NounAttribute_ValidResourceKeys_YeildsExpectedStrings()
+        public void NounAttribute_OnClass_WithoutMetadata_ValidResourceKeys_YieldsExpectedStrings()
         {
-            var nounAttribute = typeof(ExampleClass).GetProperty(nameof(ExampleClass.ExampleProperty))
+            NounAttribute nounAttribute = typeof(ModelExample.Account).GetAttribute<NounAttribute>();
+
+            Assert.AreEqual(DataModelTestString.Account_Plural, nounAttribute?.GetPlural());
+            Assert.AreEqual(DataModelTestString.Account_PluralArticle, nounAttribute?.GetPluralArticle());
+            Assert.AreEqual(DataModelTestString.Account_Singular, nounAttribute?.GetSingular());
+            Assert.AreEqual(DataModelTestString.Account_SingularArticle, nounAttribute?.GetSingularArticle());
+        }
+
+        [TestMethod]
+        public void NounAttribute_OnProperty_WithoutMetadata_ValidResourceKeys_YieldsExpectedStrings()
+        {
+            NounAttribute nounAttribute = typeof(ModelExample.Account)
+                .GetProperty(nameof(ModelExample.Account.AccountNumber))
                 ?.GetAttribute<NounAttribute>();
 
-            Assert.AreEqual(NounString.Test_SingularArticle, nounAttribute?.GetSingularArticle());
-            Assert.AreEqual(NounString.Test_Singular, nounAttribute?.GetSingular());
-            Assert.AreEqual(NounString.Test_PluralArticle, nounAttribute?.GetPluralArticle());
-            Assert.AreEqual(NounString.Test_Plural, nounAttribute?.GetPlural());
+            Assert.AreEqual(
+                DataModelTestString.Account_AccountNumber_Plural, nounAttribute?.GetPlural());
+            Assert.AreEqual(
+                DataModelTestString.Account_AccountNumber_PluralArticle, nounAttribute?.GetPluralArticle());
+            Assert.AreEqual(
+                DataModelTestString.Account_AccountNumber_Singular, nounAttribute?.GetSingular());
+            Assert.AreEqual(
+                DataModelTestString.Account_AccountNumber_SingularArticle, nounAttribute?.GetSingularArticle());
         }
-        public class ExampleClass
+
+
+        [TestMethod]
+        public void NounAttribute_OnClass_WithMetadata_ValidResourceKeys_YieldsExpectedStrings()
         {
-            [Noun(
-                Singular = nameof(NounString.Test_Singular),
-                SingularArticle = nameof(NounString.Test_SingularArticle),
-                Plural = nameof(NounString.Test_Plural),
-                PluralArticle = nameof(NounString.Test_PluralArticle),
-                ResourceType = typeof(NounString)
-                )]
-            public string ExampleProperty { get; set; }
+            NounAttribute nounAttribute = typeof(ModelMetadataExample.Account).GetAttribute<NounAttribute>();
+
+            Assert.AreEqual(DataModelTestString.Account_Plural, nounAttribute?.GetPlural());
+            Assert.AreEqual(DataModelTestString.Account_PluralArticle, nounAttribute?.GetPluralArticle());
+            Assert.AreEqual(DataModelTestString.Account_Singular, nounAttribute?.GetSingular());
+            Assert.AreEqual(DataModelTestString.Account_SingularArticle, nounAttribute?.GetSingularArticle());
+        }
+
+        [TestMethod]
+        public void NounAttribute_OnProperty_WithMetadata_ValidResourceKeys_YieldsExpectedStrings()
+        {
+            NounAttribute nounAttribute = typeof(ModelMetadataExample.Account)
+                .GetProperty(nameof(ModelMetadataExample.Account.AccountNumber))
+                ?.GetAttribute<NounAttribute>();
+
+            Assert.AreEqual(
+                DataModelTestString.Account_AccountNumber_Plural, nounAttribute?.GetPlural());
+            Assert.AreEqual(
+                DataModelTestString.Account_AccountNumber_PluralArticle, nounAttribute?.GetPluralArticle());
+            Assert.AreEqual(
+                DataModelTestString.Account_AccountNumber_Singular, nounAttribute?.GetSingular());
+            Assert.AreEqual(
+                DataModelTestString.Account_AccountNumber_SingularArticle, nounAttribute?.GetSingularArticle());
         }
     }
 }
