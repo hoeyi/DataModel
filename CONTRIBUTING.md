@@ -1,4 +1,4 @@
-# Contributing to `DataModel` #
+# Contributing to DataModel #
 
 * [Commit Message Guidelines](#commit-message-guidelines)
 * [Object Naming Conventions](#object-naming-conventions)
