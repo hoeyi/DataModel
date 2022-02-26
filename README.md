@@ -57,6 +57,6 @@ Supports generation of queries dynamically.
 `IQueryParameter` represents part of a search expression used to construct a valid left-hand side of an equation. ([source](DataModel/Expressions/IQueryParameter.cs))
 
 #### ISearchableMemberMetadata ####
-`ISearchableMemberMetadata` represents a class member that is supported for building search expressions dynamically. ([source](DataModel/Expressions/ISearchableMemberMetadata.cs))
+`ISearchableMemberMetadata` represents a class member for which dynamic build query expressions is supported. ([source](DataModel/Expressions/ISearchableMemberMetadata.cs))
 
 ###
