@@ -27,10 +27,10 @@ This library maintains the following API for consumption:
 
 ### DataModel 
 #### IModelMetadataService ####
-`IModelMetadataService` provides helper methods for accessing model metadata. This interface supports string localization using `DisplayAttribute` or similar. ([source](\DataModel\IModelMetadataService.cs))
+`IModelMetadataService` provides helper methods for accessing model metadata. This interface supports string localization using `DisplayAttribute` or similar. ([source](DataModel/IModelMetadataService.cs))
 
 #### ModelMetadataExtension ####
-`ModelMetadataExtensions` provides extension methods for use with `Type` objects to retrieve metadata elements from member attributes. ([source](\DataModel\ModelMetadataExtension.cs))
+`ModelMetadataExtensions` provides extension methods for use with `Type` objects to retrieve metadata elements from member attributes. ([source](DataModel/ModelMetadataExtension.cs))
 ###
 
 ---
@@ -39,10 +39,10 @@ This library maintains the following API for consumption:
 Provides helper methods for working with `System.ComponentModel.DataAnnotations`.
 
 #### NounAttribute ####
-`NounAttribute` describes the singular and plural forms and articles of a noun. ([source](\DataModel\Annotations\NounAttribute.cs))
+`NounAttribute` describes the singular and plural forms and articles of a noun. ([source](DataModel/Annotations/NounAttribute.cs))
 
 #### SearchableAttribute ####
-`SearchableAttribute` signals that a member can be passed to `Expressions.IExpressionBuilder`. ([source](\DataModel\Annotations\SearchableAttribute.cs))
+`SearchableAttribute` signals that a member can be passed to `Expressions.IExpressionBuilder`. ([source](DataModel/Annotations/Searchable.cs))
 ###
 
 ---
@@ -51,12 +51,12 @@ Provides helper methods for working with `System.ComponentModel.DataAnnotations`
 Supports generation of queries dynamically.
 
 #### IExpressionBuilder ####
-`IExpressionBuilder` provides generic methods used for building query expressions dynamically. ([source](\DataModel\Expressions\IExpressionBuilder.cs))
+`IExpressionBuilder` provides generic methods used for building query expressions dynamically. ([source](DataModel/Expressions/IExpressionBuilder.cs))
 
 #### IQueryParameter ####
-`IQueryParameter` represents part of a search expression used to construct a valid left-hand side of an equation. ([source](\DataModel\Expressions\IQueryParameter.cs))
+`IQueryParameter` represents part of a search expression used to construct a valid left-hand side of an equation. ([source](DataModel/Expressions/IQueryParameter.cs))
 
 #### ISearchableMemberMetadata ####
-`ISearchableMemberMetadata` represents a class member that is supported for building search expressions dynamically. ([source](\DataModel\Expressions\ISearchableMemberMetadata.cs))
+`ISearchableMemberMetadata` represents a class member for which dynamic build query expressions is supported. ([source](DataModel/Expressions/ISearchableMemberMetadata.cs))
 
 ###
