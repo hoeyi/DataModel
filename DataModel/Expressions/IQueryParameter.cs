@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ichosoft.DataModel.Expressions
+namespace Ichosys.DataModel.Expressions
 {
     /// <summary>
     /// Represents a paramter used to filter search results.

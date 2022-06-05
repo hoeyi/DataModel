@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
-using Ichosoft.DataModel.Resources;
+using Ichosys.DataModel.Resources;
 
-namespace Ichosoft.DataModel.Expressions
+namespace Ichosys.DataModel.Expressions
 {
     /// <summary>
     /// Represents an operator that compares two operands.

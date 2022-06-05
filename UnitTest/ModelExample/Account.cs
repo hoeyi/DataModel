@@ -1,12 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Ichosoft.DataModel.Annotations;
-using Ichosoft.DataModel.UnitTest.Resources;
+using Ichosys.DataModel.Annotations;
+using Ichosys.DataModel.UnitTest.Resources;
 
 #nullable disable
 
-namespace Ichosoft.DataModel.UnitTest.ModelExample
+namespace Ichosys.DataModel.UnitTest.ModelExample
 {
     [Table("Account", Schema = "EulerApp")]
     [Noun(

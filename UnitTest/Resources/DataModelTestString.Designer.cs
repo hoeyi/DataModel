@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ichosoft.DataModel.UnitTest.Resources {
+namespace Ichosys.DataModel.UnitTest.Resources {
     using System;
     
     
@@ -19,7 +19,7 @@ namespace Ichosoft.DataModel.UnitTest.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class DataModelTestString {
@@ -39,7 +39,7 @@ namespace Ichosoft.DataModel.UnitTest.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ichosoft.DataModel.UnitTest.Resources.DataModelTestString", typeof(DataModelTestString).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ichosys.DataModel.UnitTest.Resources.DataModelTestString", typeof(DataModelTestString).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

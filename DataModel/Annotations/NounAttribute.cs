@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Resources;
 
-namespace Ichosoft.DataModel.Annotations
+namespace Ichosys.DataModel.Annotations
 {
     /// <summary>
     /// Represents a noun that describes the object.

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Ichosoft.DataModel.UnitTest")]
+[assembly: InternalsVisibleTo("Ichosys.DataModel.UnitTest")]
 
-namespace Ichosoft.DataModel
+namespace Ichosys.DataModel
 {
     /// <summary>
     /// Provides methods for accessing object metadata.

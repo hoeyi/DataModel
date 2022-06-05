@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System;
 
-namespace Ichosoft.DataModel.Annotations
+namespace Ichosys.DataModel.Annotations
 {
     /// <summary>
     /// Extension methods for <see cref="MemberInfo"/> to support 

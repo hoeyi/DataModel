@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Ichosoft.DataModel.UnitTest
+namespace Ichosys.DataModel.UnitTest
 {
     class Shared
     {

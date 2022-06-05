@@ -3,12 +3,12 @@ using System.Linq;
 using System.Reflection;
 using System.Linq.Expressions;
 using System.Collections.Generic;
-using Ichosoft.DataModel.Annotations;
-using Ichosoft.DataModel.Resources;
+using Ichosys.DataModel.Annotations;
+using Ichosys.DataModel.Resources;
 using System.ComponentModel.DataAnnotations;
-using Ichosoft.Extensions.Common.Localization;
+using Ichosys.Extensions.Common.Localization;
 
-namespace Ichosoft.DataModel.Expressions
+namespace Ichosys.DataModel.Expressions
 {
     #region IExpressionBuilder implementation
     /// <summary>

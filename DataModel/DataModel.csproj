@@ -2,12 +2,12 @@
 
   <PropertyGroup>
       <TargetFramework>net5.0</TargetFramework>
-      <AssemblyName>Ichosoft.DataModel</AssemblyName>
-      <RootNamespace>Ichosoft.DataModel</RootNamespace>
+      <AssemblyName>Ichosys.DataModel</AssemblyName>
+      <RootNamespace>Ichosys.DataModel</RootNamespace>
       <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
       <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 
-      <PackageId>Ichosoft.DataModel</PackageId>
+      <PackageId>Ichosys.DataModel</PackageId>
       <BuildNumber Condition="$(BuildNumber) == ''">0</BuildNumber>
       <!--Comment out build number to avoid auto-updating project build properties. Uncomment for release builds only.-->
       <!--<BuildNumber>$([System.DateTime]::UtcNow.ToString(mmff))</BuildNumber>-->
@@ -17,10 +17,10 @@
       <Copyright>2021 hoeyi</Copyright>
       <Authors>hoeyi</Authors>
       <Company>hoeyi</Company>
-      <Product>Ichosoft.DataModel</Product>
+      <Product>Ichosys.DataModel</Product>
       <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
       <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-      <PackageProjectUrl>https://github.com/Ichosoft/Expressions</PackageProjectUrl>
+      <PackageProjectUrl>https://github.com/Ichosys/Expressions</PackageProjectUrl>
 
       <GenerateDocumentationFile>true</GenerateDocumentationFile>
       <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
@@ -76,7 +76,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ichosoft.Extensions.Common" Version="1.3.0.3319" />
+    <PackageReference Include="Ichosys.Extensions.Common" Version="1.4.0.592" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

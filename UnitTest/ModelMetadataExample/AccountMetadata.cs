@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Ichosoft.DataModel.Annotations;
-using Ichosoft.DataModel.UnitTest.Resources;
+using Ichosys.DataModel.Annotations;
+using Ichosys.DataModel.UnitTest.Resources;
 
-namespace Ichosoft.DataModel.UnitTest.ModelMetadataExample
+namespace Ichosys.DataModel.UnitTest.ModelMetadataExample
 {
     [Noun(
         Plural = nameof(DataModelTestString.Account_Plural),

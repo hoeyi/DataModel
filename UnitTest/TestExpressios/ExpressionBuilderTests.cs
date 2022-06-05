@@ -6,11 +6,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Resources;
-using Ichosoft.DataModel.Expressions;
+using Ichosys.DataModel.Expressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ichosoft.DataModel.Annotations;
+using Ichosys.DataModel.Annotations;
 
-namespace Ichosoft.DataModel.UnitTest.TestExpressions
+namespace Ichosys.DataModel.UnitTest.TestExpressions
 {
     [TestClass]
     public class ExpressionBuilderTests

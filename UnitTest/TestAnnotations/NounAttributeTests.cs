@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ichosoft.DataModel.Annotations;
-using Ichosoft.DataModel.UnitTest.Resources;
+using Ichosys.DataModel.Annotations;
+using Ichosys.DataModel.UnitTest.Resources;
 
-namespace Ichosoft.DataModel.UnitTest.TestAnnotations
+namespace Ichosys.DataModel.UnitTest.TestAnnotations
 {
     [TestClass]
     public class NounAttributeTests

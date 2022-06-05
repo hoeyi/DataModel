@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ichosoft.DataModel.Exceptions
+namespace Ichosys.DataModel.Exceptions
 {
     /// <summary>
     /// Represents errors that occuring when parsing text.

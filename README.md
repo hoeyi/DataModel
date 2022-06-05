@@ -1,4 +1,4 @@
-# Ichosoft.DataModel #
+# Ichosys.DataModel #
 This library contains class and methods for supporting a model using data annotations to record metadata.
 
 * [Building Project](#building-prjoject)

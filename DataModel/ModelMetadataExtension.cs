@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 
-namespace Ichosoft.DataModel
+namespace Ichosys.DataModel
 {
     /// <summary>
     /// Provides extension methods for <see cref="Type"/> to access member metadata.

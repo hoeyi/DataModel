@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Reflection;
 using System.ComponentModel.DataAnnotations;
-using Ichosoft.DataModel.Annotations;
+using Ichosys.DataModel.Annotations;
 
-namespace Ichosoft.DataModel
+namespace Ichosys.DataModel
 {
     /// <summary>
     /// Provides methods for accessing object metadata.

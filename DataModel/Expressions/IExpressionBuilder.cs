@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Ichosoft.DataModel.Expressions
+namespace Ichosys.DataModel.Expressions
 {
     /// <summary>
     /// Represents a helper class for building filter expressions.

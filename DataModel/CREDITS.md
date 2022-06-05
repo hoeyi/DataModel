@@ -2,10 +2,10 @@
 This project uses some libraries written by others. Credits for each referenced work are listed below.
 
 ---
-### Ichosoft.Extensions.Common ###
-https://github.com/Ichosoft/Extensions.Common
+### Ichosys.Extensions.Common ###
+https://github.com/Ichosys/Extensions.Common
 
-Ichosoft.Extensions.Common version 1.3.0
+Ichosys.Extensions.Common version 1.3.0
 
 MIT License
 
