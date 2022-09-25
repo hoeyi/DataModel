@@ -1,131 +1,172 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using Ichosys.DataModel.Annotations;
 
-[assembly: InternalsVisibleTo("Ichosys.DataModel.UnitTest")]
+[assembly: InternalsVisibleTo("Ichosys.DataModel.Tests")]
 
 namespace Ichosys.DataModel
 {
     /// <summary>
     /// Provides methods for accessing object metadata.
     /// </summary>
-    public interface IModelMetadataService
+    public partial interface IModelMetadataService
     {
         /// <summary>
-        /// Gets the attribute applied to the type.
+        /// Gets the first <typeparamref name="TAttribute"/> associated with the 
+        /// <typeparamref name="TModel"/> type.
         /// </summary>
-        /// <typeparam name="TAttribute"></typeparam>
-        /// <param name="type">The type to check for the attribute.</param>
-        /// <returns>A <typeparamref name="TAttribute"/> instance if it exists, else null.</returns>
-        TAttribute AttributeFor<TAttribute>(Type type)
-            where TAttribute : Attribute;
+        /// <typeparam name="TModel">The type decorated with <typeparamref name="TAttribute"/>.</typeparam>
+        /// <typeparam name="TAttribute">The attribute type to retreive.</typeparam>
+        /// <returns>An instance of <typeparamref name="TAttribute"/> if defined, else null.</returns>
+        TAttribute GetAttribute<TModel, TAttribute>()
+            where TAttribute : Attribute
+            => typeof(TModel).GetAttribute<TAttribute>();
 
         /// <summary>
-        /// Gets the attribute applied to a member declared within the given type, that 
-        /// matches the type parameter.
+        /// Gets the <typeparamref name="TAttribute"/> associated with the <typeparamref name="TModel"/> 
+        /// member indicated by the given expression.
         /// </summary>
-        /// <typeparam name="TAttribute">The attribute type.</typeparam>
-        /// <param name="type">The declaring type.</param>
-        /// <param name="memberName">The member name.</param>
-        /// <returns>A <typeparamref name="TAttribute"/> instance if it exists, else null.</returns>
-        TAttribute AttributeFor<TAttribute>(Type type, string memberName)
-            where TAttribute : Attribute;
+        /// <typeparam name="TAttribute">A type derived from <see cref="Attribute"/>.</typeparam>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="expression"></param>
+        /// <returns>An instance of <typeparamref name="TAttribute"/> if defined, else null.</returns>
+        TAttribute AttributeFor<TAttribute, TModel>(Expression<Func<TModel, object>> expression)
+            where TAttribute : Attribute
+            => GetAttribute<TModel, TAttribute>(expression);
 
         /// <summary>
-        /// Gets the description for the member declared in the given type.
+        /// Gets the description text associated with the <typeparamref name="TModel"/> member 
+        /// found at the endpoint of the given expression.
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="memberName"></param>
-        /// <returns>The member description, if defined, else null.</returns>
-        string DescriptionFor(Type type, string memberName);
+        /// <typeparam name="TModel">The <see cref="Type"/> in which the selected property is declared.</typeparam>
+        /// <param name="expression">An <see cref="Expression{TDelegate}"/> seleting a public 
+        /// <typeparamref name="TModel"/> member.</param>
+        /// <returns>A <see cref="string"/> if the metadata property is defined, else null.</returns>
+        string DescriptionFor<TModel>(Expression<Func<TModel, object>> expression) =>
+            GetDisplayAttribute(expression)?.GetDescription();
 
         /// <summary>
-        /// Gets the value used to group members.
+        /// Gets the group name associated with the <typeparamref name="TModel"/> member 
+        /// found at the endpoint of the given expression.
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="memberName"></param>
+        /// <typeparam name="TModel">The <see cref="Type"/> in which the selected property is declared.</typeparam>
+        /// <param name="expression">An <see cref="Expression{TDelegate}"/> seleting a public 
+        /// <typeparamref name="TModel"/> member.</param>
+        /// <returns>A <see cref="string"/> if the metadata property is defined, else null.</returns>
+        string GroupNameFor<TModel>(Expression<Func<TModel, object>> expression) =>
+            GetDisplayAttribute(expression)?.GetGroupName();
+
+        /// <summary>
+        /// Gets the display name associated with the <typeparamref name="TModel"/> member 
+        /// found at the endpoint of the given expression.
+        /// </summary>
+        /// <typeparam name="TModel">The <see cref="Type"/> in which the selected property is declared.</typeparam>
+        /// <param name="expression">An <see cref="Expression{TDelegate}"/> seleting a public 
+        /// <typeparamref name="TModel"/> member.</param>
+        /// <returns>A <see cref="string"/> if the metadata property is defined, else null.</returns>
+        string NameFor<TModel>(Expression<Func<TModel, object>> expression) =>
+            GetDisplayAttribute(expression)?.GetName();
+
+        /// <summary>
+        /// Gets the display order associated with the <typeparamref name="TModel"/> member 
+        /// found at the endpoint of the given expression.
+        /// </summary>
+        /// <typeparam name="TModel">The <see cref="Type"/> in which the selected property is declared.</typeparam>
+        /// <param name="expression">An <see cref="Expression{TDelegate}"/> seleting a public 
+        /// <typeparamref name="TModel"/> member.</param>
+        /// <returns>An <see cref="int"/> if the metadata property is defined, else null.</returns>
+        int? OrderFor<TModel>(Expression<Func<TModel, object>> expression) =>
+            GetDisplayAttribute(expression)?.GetOrder();
+
+        /// <summary>
+        /// Gets the input prompt associated with the <typeparamref name="TModel"/> member 
+        /// found at the endpoint of the given expression.
+        /// </summary>
+        /// <typeparam name="TModel">The <see cref="Type"/> in which the selected property is declared.</typeparam>
+        /// <param name="expression">An <see cref="Expression{TDelegate}"/> seleting a public 
+        /// <typeparamref name="TModel"/> member.</param>
+        /// <returns>A <see cref="string"/> if the metadata property is defined, else null.</returns>
+        string PromptFor<TModel>(Expression<Func<TModel, object>> expression) =>
+            GetDisplayAttribute(expression)?.GetPrompt();
+
+        /// <summary>
+        /// Gets the short name associated with the <typeparamref name="TModel"/> member 
+        /// found at the endpoint of the given expression.
+        /// </summary>
+        /// <typeparam name="TModel">The <see cref="Type"/> in which the selected property is declared.</typeparam>
+        /// <param name="expression">An <see cref="Expression{TDelegate}"/> seleting a public 
+        /// <typeparamref name="TModel"/> member.</param>
+        /// <returns>A <see cref="string"/> if the metadata property is defined, else null.</returns>
+        string ShortNameFor<TModel>(Expression<Func<TModel, object>> expression) =>
+            GetDisplayAttribute(expression)?.GetShortName();
+    }
+
+    // Helper methods.
+    public partial interface IModelMetadataService
+    {
+        /// <summary>
+        /// Gets the <see cref="MemberInfo"/> instance from the given <see cref="Expression{TDelegate}"/>.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="expression"></param>
+        /// <returns>An instance of <see cref="MemberInfo"/>.</returns>
+        /// <exception cref="ArgumentNullException"></exception> 
+        /// <exception cref="NotSupportedException"></exception>
+        private static MemberInfo GetMemberInfo<T>(Expression<Func<T, object>> expression)
+        {
+            if (expression is null)
+                throw new ArgumentNullException(nameof(expression));
+
+            LambdaExpression lambda = expression;
+            if (lambda is null)
+                throw new NotSupportedException();
+
+            MemberExpression memberExpr = lambda.Body.NodeType switch
+            {
+                ExpressionType.Convert => ((UnaryExpression)lambda.Body).Operand as MemberExpression,
+                ExpressionType.MemberAccess => lambda.Body as MemberExpression,
+                _ => throw new NotSupportedException()
+            };
+
+            return memberExpr.Member;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="expression"></param>
         /// <returns></returns>
-        string GroupNameFor(Type type, string memberName);
+        private static DisplayAttribute GetDisplayAttribute<T>(
+            Expression<Func<T, object>> expression)
+        {
+            if (expression is null) return null;
 
-        /// <summary>
-        /// Gets the display text for the member declared in the given type.
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="memberName"></param>
-        /// <returns>The member display text, if defined, else 
-        /// {typeof(TModel).Name}.{memberName} as an interpolated <see cref="string"/>.</returns>
-        string NameFor(Type type, string memberName);
+            MemberInfo memberInfo = GetMemberInfo(expression);
 
-        /// <summary>
-        /// Gets the display order for the member declared in the given type.
-        /// </summary>
-        /// <param name="type">The declaring type.</param>
-        /// <param name="memberName">The member name.</param>
-        /// <returns>The member order, if defined, else null.</returns>
-        int? OrderFor(Type type, string memberName);
+            return memberInfo?.GetAttribute<DisplayAttribute>();
+        }
 
-        /// <summary>
-        /// Gets the value used to set the watermark for prompts.
-        /// </summary>
-        /// <param name="type">The declaring type.</param>
-        /// <param name="memberName">The member name.</param>
-        /// <returns>The prompt watermarks for the member.</returns>
-        string PromptFor(Type type, string memberName);
+        private static TAttribute GetAttribute<T, TAttribute>(
+            Expression<Func<T, object>> expression)
+            where TAttribute : Attribute
+        {
+            if (expression is null)
+                return null;
 
-        /// <summary>
-        /// Gets the value used for the grid column label.
-        /// </summary>
-        /// <param name="type">The declaring type.</param>
-        /// <param name="memberName">The member name.</param>
-        /// <returns>The short name for the member.</returns>
-        string ShortNameFor(Type type, string memberName);
+            MemberInfo memberInfo = GetMemberInfo(expression);
 
-        /// <summary>
-        /// Gets the description for the member declared in the given type.
-        /// </summary>
-        /// <typeparam name="TModel">The declaring type.</typeparam>
-        /// <param name="memberName">The member name.</param>
-        /// <returns>The member description, if defined, else null.</returns>
-        string DescriptionFor<TModel>(string memberName);
+            return memberInfo?.GetAttribute<TAttribute>();
+        }
+    }
 
-        /// <summary>
-        /// Gets the value used to group members.
-        /// </summary>
-        /// <typeparam name="TModel">The declaring type.</typeparam>
-        /// <param name="memberName">The member name.</param>
-        /// <returns>The member group name, if defined, else null.</returns>
-        string GroupNameFor<TModel>(string memberName);
-
-        /// <summary>
-        /// Gets the display text for the member declared in the given type.
-        /// </summary>
-        /// <typeparam name="TModel">The declaring type.</typeparam>
-        /// <param name="memberName">The member name.</param>
-        /// <returns>The member display text, if defined, else 
-        /// {typeof(TModel).Name}.{memberName} as an interpolated <see cref="string"/>.</returns>
-        string NameFor<TModel>(string memberName);
-
-        /// <summary>
-        /// Gets the display order for the member declared in the given type.
-        /// </summary>
-        /// <typeparam name="TModel">The declaring type.</typeparam>
-        /// <param name="memberName">The member name.</param>
-        /// <returns>The member order, if defined, else null.</returns>
-        int? OrderFor<TModel>(string memberName);
-
-        /// <summary>
-        /// Gets the value used to set the watermark for prompts.
-        /// </summary>
-        /// <typeparam name="TModel">The declaring type.</typeparam>
-        /// <param name="memberName">The member name.</param>
-        /// <returns>The prompt watermarks for the member.</returns>
-        string PromptFor<TModel>(string memberName);
-
-        /// <summary>
-        /// Gets the value used for the grid column label.
-        /// </summary>
-        /// <typeparam name="TModel">The declaring type.</typeparam>
-        /// <param name="memberName">The member name.</param>
-        /// <returns>The short name for the member.</returns>
-        string ShortNameFor<TModel>(string memberName);
+    /// <summary>
+    /// Provides methods for accessing object metadata.
+    /// </summary>
+    public class ModelMetadataService : IModelMetadataService
+    {
     }
 }
