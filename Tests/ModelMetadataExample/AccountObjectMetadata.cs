@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Ichosys.DataModel.Annotations;
-using Ichosys.DataModel.UnitTest.Resources;
+using Ichosys.DataModel.Tests.Resources;
 
-namespace Ichosys.DataModel.UnitTest.ModelMetadataExample
+namespace Ichosys.DataModel.Tests.ModelMetadataExample
 {
     public class AccountObjectMetadata
     {

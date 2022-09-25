@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ichosys.DataModel.Annotations;
-using Ichosys.DataModel.UnitTest.Resources;
+using Ichosys.DataModel.Tests.Resources;
 
-namespace Ichosys.DataModel.UnitTest.TestAnnotations
+namespace Ichosys.DataModel.Tests.Unit
 {
     [TestClass]
     public class NounAttributeTests

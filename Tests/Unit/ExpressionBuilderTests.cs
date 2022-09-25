@@ -10,7 +10,7 @@ using Ichosys.DataModel.Expressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ichosys.DataModel.Annotations;
 
-namespace Ichosys.DataModel.UnitTest.TestExpressions
+namespace Ichosys.DataModel.Tests.Unit
 {
     [TestClass]
     public class ExpressionBuilderTests
@@ -52,7 +52,7 @@ namespace Ichosys.DataModel.UnitTest.TestExpressions
             string expected;
 
             Type type = typeof(ComparisonOperator);
-            foreach(ComparisonOperator r in res)
+            foreach (ComparisonOperator r in res)
             {
                 observed = type.GetMember(memberName: $"{r}")?.GetAttribute<DisplayAttribute>()?.GetName();
                 expected = rm.GetString($"{r}");
@@ -94,7 +94,7 @@ namespace Ichosys.DataModel.UnitTest.TestExpressions
             Debug.WriteLine(string.Format("Nested property check: {0}", basePropertyReturned ? "PASSED" : "FAILED"));
 
             string observed = expectedArray[0].Display?.GetName();
-            string expected = Resources.DataModelTestString.Account_AccountNumber;
+            string expected = Resources.DataModelTestString.Display_AccountNumber_Name;
             Shared.WriteAreEqualDebug(expected, observed);
             Assert.AreEqual(expected, observed);
 
@@ -140,7 +140,7 @@ namespace Ichosys.DataModel.UnitTest.TestExpressions
             Debug.WriteLine(string.Format("Nested property check: {0}", basePropertyReturned ? "PASSED" : "FAILED"));
 
             string observed = expectedArray[0].Display?.GetName();
-            string expected = Resources.DataModelTestString.Account_AccountNumber;
+            string expected = Resources.DataModelTestString.Display_AccountNumber_Name;
             Shared.WriteAreEqualDebug(expected, observed);
             Assert.AreEqual(expected, observed);
 
@@ -247,7 +247,7 @@ namespace Ichosys.DataModel.UnitTest.TestExpressions
         {
             ExpressionBuilder expBuilder = new ExpressionBuilder()
             {
-                CustomDateTimeFormats = new string[]{ "MMddyyyy" }
+                CustomDateTimeFormats = new string[] { "MMddyyyy" }
             };
             QueryParameter<ModelExample.Account> queryParameter = new QueryParameter<ModelExample.Account>(
                 qualifiedMemberName: $"{nameof(ModelExample.Account.BooksClosedDate)}",
@@ -325,7 +325,7 @@ namespace Ichosys.DataModel.UnitTest.TestExpressions
 
             Assert.IsInstanceOfType(parameter, typeof(IQueryParameter<ModelExample.Account>));
             Assert.AreEqual(
-                $"{nameof(ModelExample.Account.AccountNavigation)}.{nameof(ModelExample.AccountObject.AccountObjectCode)}", 
+                $"{nameof(ModelExample.Account.AccountNavigation)}.{nameof(ModelExample.AccountObject.AccountObjectCode)}",
                 parameter.MemberName);
         }
     }
