@@ -2,11 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Ichosys.DataModel.Annotations;
-using Ichosys.DataModel.UnitTest.Resources;
+using Ichosys.DataModel.Tests.Resources;
 
 #nullable disable
 
-namespace Ichosys.DataModel.UnitTest.ModelExample
+namespace Ichosys.DataModel.Tests.ModelExample
 {
     [Table("AccountObject", Schema = "EulerApp")]
     public partial class AccountObject

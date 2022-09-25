@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Ichosys.DataModel.UnitTest.Resources {
+namespace Ichosys.DataModel.Tests.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Ichosys.DataModel.UnitTest.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ichosys.DataModel.UnitTest.Resources.DataModelTestString", typeof(DataModelTestString).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ichosys.DataModel.Tests.Resources.DataModelTestString", typeof(DataModelTestString).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,15 +57,6 @@ namespace Ichosys.DataModel.UnitTest.Resources {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Account number.
-        /// </summary>
-        public static string Account_AccountNumber {
-            get {
-                return ResourceManager.GetString("Account_AccountNumber", resourceCulture);
             }
         }
         
@@ -147,6 +138,51 @@ namespace Ichosys.DataModel.UnitTest.Resources {
         public static string AccountObject_AccountObjectCode {
             get {
                 return ResourceManager.GetString("AccountObject_AccountObjectCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The custodian/bank identifier for the account..
+        /// </summary>
+        public static string Display_AccountNumber_Description {
+            get {
+                return ResourceManager.GetString("Display_AccountNumber_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General Information.
+        /// </summary>
+        public static string Display_AccountNumber_GroupName {
+            get {
+                return ResourceManager.GetString("Display_AccountNumber_GroupName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account Number.
+        /// </summary>
+        public static string Display_AccountNumber_Name {
+            get {
+                return ResourceManager.GetString("Display_AccountNumber_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter account number.
+        /// </summary>
+        public static string Display_AccountNumber_Prompt {
+            get {
+                return ResourceManager.GetString("Display_AccountNumber_Prompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Acct. #.
+        /// </summary>
+        public static string Display_AccountNumber_ShortName {
+            get {
+                return ResourceManager.GetString("Display_AccountNumber_ShortName", resourceCulture);
             }
         }
     }

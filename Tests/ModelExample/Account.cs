@@ -2,11 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Ichosys.DataModel.Annotations;
-using Ichosys.DataModel.UnitTest.Resources;
+using Ichosys.DataModel.Tests.Resources;
 
 #nullable disable
 
-namespace Ichosys.DataModel.UnitTest.ModelExample
+namespace Ichosys.DataModel.Tests.ModelExample
 {
     [Table("Account", Schema = "EulerApp")]
     [Noun(
@@ -29,7 +29,12 @@ namespace Ichosys.DataModel.UnitTest.ModelExample
         [StringLength(64)]
         [Searchable]
         [Display(
-            Name = nameof(DataModelTestString.Account_AccountNumber), 
+            Description = nameof(DataModelTestString.Display_AccountNumber_Description),
+            GroupName = nameof(DataModelTestString.Display_AccountNumber_GroupName),
+            Name = nameof(DataModelTestString.Display_AccountNumber_Name),
+            Order = default,
+            Prompt = nameof(DataModelTestString.Display_AccountNumber_Prompt),
+            ShortName = nameof(DataModelTestString.Display_AccountNumber_ShortName),
             ResourceType = typeof(DataModelTestString))]
         [Noun(
             Plural = nameof(DataModelTestString.Account_AccountNumber_Plural),

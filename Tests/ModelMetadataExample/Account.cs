@@ -1,4 +1,4 @@
-﻿namespace Ichosys.DataModel.UnitTest.ModelMetadataExample
+﻿namespace Ichosys.DataModel.Tests.ModelMetadataExample
 {
     public partial class Account
     {

@@ -120,9 +120,6 @@
   <data name="AccountObject_AccountObjectCode" xml:space="preserve">
     <value>Account code</value>
   </data>
-  <data name="Account_AccountNumber" xml:space="preserve">
-    <value>Account number</value>
-  </data>
   <data name="Account_AccountNumber_Plural" xml:space="preserve">
     <value>account numbers</value>
   </data>
@@ -146,5 +143,20 @@
   </data>
   <data name="Account_SingularArticle" xml:space="preserve">
     <value>the</value>
+  </data>
+  <data name="Display_AccountNumber_Description" xml:space="preserve">
+    <value>The custodian/bank identifier for the account.</value>
+  </data>
+  <data name="Display_AccountNumber_GroupName" xml:space="preserve">
+    <value>General Information</value>
+  </data>
+  <data name="Display_AccountNumber_Name" xml:space="preserve">
+    <value>Account Number</value>
+  </data>
+  <data name="Display_AccountNumber_Prompt" xml:space="preserve">
+    <value>Enter account number</value>
+  </data>
+  <data name="Display_AccountNumber_ShortName" xml:space="preserve">
+    <value>Acct. #</value>
   </data>
 </root>

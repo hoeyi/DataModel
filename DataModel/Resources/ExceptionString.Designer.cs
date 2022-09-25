@@ -61,11 +61,20 @@ namespace Ichosys.DataModel.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OperandType is not supported..
+        /// </summary>
+        internal static string ExactValueAttribute_OperandType_MustBeSet {
+            get {
+                return ResourceManager.GetString("ExactValueAttribute_OperandType_MustBeSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A search expression could not be built from the given parameters..
         /// </summary>
         internal static string Expression_General {
             get {
-                return ResourceManager.GetString("Expression.General", resourceCulture);
+                return ResourceManager.GetString("Expression_General", resourceCulture);
             }
         }
         
@@ -74,7 +83,7 @@ namespace Ichosys.DataModel.Resources {
         /// </summary>
         internal static string Expression_NestingNotSupported {
             get {
-                return ResourceManager.GetString("Expression.NestingNotSupported", resourceCulture);
+                return ResourceManager.GetString("Expression_NestingNotSupported", resourceCulture);
             }
         }
         
@@ -83,7 +92,7 @@ namespace Ichosys.DataModel.Resources {
         /// </summary>
         internal static string Expression_OperatorInvalidForField {
             get {
-                return ResourceManager.GetString("Expression.OperatorInvalidForField", resourceCulture);
+                return ResourceManager.GetString("Expression_OperatorInvalidForField", resourceCulture);
             }
         }
         
@@ -92,7 +101,7 @@ namespace Ichosys.DataModel.Resources {
         /// </summary>
         internal static string Expression_SearchMemberNull {
             get {
-                return ResourceManager.GetString("Expression.SearchMemberNull", resourceCulture);
+                return ResourceManager.GetString("Expression_SearchMemberNull", resourceCulture);
             }
         }
     }

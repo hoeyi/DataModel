@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Ichosys.DataModel.Annotations;
-using Ichosys.DataModel.UnitTest.Resources;
+using Ichosys.DataModel.Tests.Resources;
 
-namespace Ichosys.DataModel.UnitTest.ModelMetadataExample
+namespace Ichosys.DataModel.Tests.ModelMetadataExample
 {
     [Noun(
         Plural = nameof(DataModelTestString.Account_Plural),
@@ -15,7 +15,7 @@ namespace Ichosys.DataModel.UnitTest.ModelMetadataExample
     {
         [Searchable]
         [Display(
-            Name = nameof(DataModelTestString.Account_AccountNumber),
+            Name = nameof(DataModelTestString.Display_AccountNumber_Name),
             ResourceType = typeof(DataModelTestString))]
         [Noun(
             Plural = nameof(DataModelTestString.Account_AccountNumber_Plural),
