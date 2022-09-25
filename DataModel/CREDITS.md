@@ -5,7 +5,7 @@ This project uses some libraries written by others. Credits for each referenced 
 ### Ichosys.Extensions.Common ###
 https://github.com/Ichosys/Extensions.Common
 
-Ichosys.Extensions.Common version 1.3.0
+Ichosys.Extensions.Common version 1.4.0
 
 MIT License
 
