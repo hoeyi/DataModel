@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-      <TargetFramework>net5.0</TargetFramework>
+      <TargetFramework>net6.0</TargetFramework>
       <AssemblyName>Ichosys.DataModel</AssemblyName>
       <RootNamespace>Ichosys.DataModel</RootNamespace>
       <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
@@ -11,7 +11,7 @@
       <BuildNumber Condition="$(BuildNumber) == ''">0</BuildNumber>
       <!--Comment out build number to avoid auto-updating project build properties. Uncomment for release builds only.-->
       <!--<BuildNumber>$([System.DateTime]::UtcNow.ToString(mmff))</BuildNumber>-->
-      <VersionPrefix>2.2.0</VersionPrefix>
+      <VersionPrefix>3.0.0</VersionPrefix>
       <Version>$(VersionPrefix).$(BuildNumber)</Version>
       <Description>A .NET library for building expressions dynamically.</Description>
       <Copyright>2021 hoeyi</Copyright>
