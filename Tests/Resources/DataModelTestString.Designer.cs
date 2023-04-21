@@ -61,6 +61,24 @@ namespace Ichosys.DataModel.Tests.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The primary owner(s) of the account.
+        /// </summary>
+        public static string Account_AccountHolder_Description {
+            get {
+                return ResourceManager.GetString("Account_AccountHolder_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account holder.
+        /// </summary>
+        public static string Account_AccountHolder_Name {
+            get {
+                return ResourceManager.GetString("Account_AccountHolder_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to account numbers.
         /// </summary>
         public static string Account_AccountNumber_Plural {

@@ -26,7 +26,11 @@ namespace Ichosys.DataModel.Tests.ModelMetadataExample
         )]
         public string AccountNumber { get; set; }
 
-
+        [Display(
+            Description = nameof(DataModelTestString.Account_AccountHolder_Description),
+            Name = nameof(DataModelTestString.Account_AccountHolder_Name),
+            ResourceType = typeof(DataModelTestString))]
+        public string AccountHolder { get; }
     }
 
     [MetadataType(typeof(AccountMetadata))]

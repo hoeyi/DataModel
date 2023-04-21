@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ichosys.DataModel.Annotations;
 using Ichosys.DataModel.Tests.Resources;
 using Ichosys.DataModel.Tests.ModelExample;
+using System.ComponentModel.DataAnnotations;
 
 namespace Ichosys.DataModel.Tests.Unit
 {
@@ -14,6 +15,23 @@ namespace Ichosys.DataModel.Tests.Unit
     public class MetadataServiceTests
     {
         private readonly IModelMetadataService metadataService = new ModelMetadataService();
+
+        [TestMethod]
+        public void GetNameFor_Class_WithoutMetadata_NotSettableProperty_ReturnsMatchingString()
+        {
+            string observed = metadataService.NameFor<Account>(x => x.AccountHolder);
+
+            Assert.AreEqual(DataModelTestString.Account_AccountHolder_Name, observed);
+        }
+
+        [TestMethod]
+        public void GetNameFor_Class_WithMetadata_NotSettableProperty_ReturnsMatchingString()
+        {
+            string observed = metadataService.NameFor<ModelMetadataExample.Account>(x => x.AccountHolder);
+
+            Assert.AreEqual(DataModelTestString.Account_AccountHolder_Name, observed);
+        }
+
         [TestMethod]
         public void GetAttributeFor_Class_WithoutMetadata_YieldsMatchingInstance()
         {

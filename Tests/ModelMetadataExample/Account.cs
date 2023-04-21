@@ -5,5 +5,7 @@
         public string AccountNumber { get; set; }
 
         public AccountObject AccountNavigation { get; set; }
+
+        public string AccountHolder { get; }
     }
 }

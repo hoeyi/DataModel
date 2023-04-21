@@ -57,5 +57,11 @@ namespace Ichosys.DataModel.Tests.ModelExample
         [ForeignKey(nameof(AccountId))]
         [InverseProperty(nameof(AccountObject.Account))]
         public virtual AccountObject AccountNavigation { get; set; }
+
+        [Display(
+            Description = nameof(DataModelTestString.Account_AccountHolder_Description),
+            Name = nameof(DataModelTestString.Account_AccountHolder_Name),
+            ResourceType = typeof(DataModelTestString))]
+        public string AccountHolder { get; }
     }
 }
