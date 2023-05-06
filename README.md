@@ -1,5 +1,5 @@
 # Ichosys.DataModel #
-This library contains class and methods for supporting a model using data annotations to record metadata.
+This library contains classes and methods for applying metadata to objects, accessing metadata for presentation in user interfaces or for generating search expressions.
 
 * [Building Project](#building-prjoject)
 * [Public API](#api)
@@ -9,35 +9,19 @@ Be sure to read the [guidelines for contributing](CONTRIBUTING.md) to this proje
 ## Building Project ##
 By default, the project `$(BuildNumber)` property is set to zero. Uncomment the line `Extensions.Configuration.csproj` to allow auto-assignment of the build number. Once the build is complete, revert the change to the `$(BuilderNumber)` property assignment.
 
-## API ##
-This library maintains the following API for consumption:
-
-[DataModel](#DataModel)
-* [IModelMetadataService](#IModelMetadataService)
-* [ModelMetadataExtension](#ModelMetadataExtension)
-
-[DataModel.Annotations](#DataModel.Annotations)
-* [NounAttribute](#NounAttribute)
-* [SearchableAttribute](#SearchableAttribute)
-
-[DataModel.Expressions](#DataModel.Expressions)
-* [IExpressionBuilder](#IExpressionBuilder)
-* [IQueryParameter](#IQueryParameter)
-* [ISearchableMemberMetadata](#ISearchableMemberMetadata)
+## Contents ##
 
 ### DataModel 
 #### IModelMetadataService ####
 `IModelMetadataService` provides helper methods for accessing model metadata. This interface supports string localization using `DisplayAttribute` or similar. ([source](DataModel/IModelMetadataService.cs))
-
-#### ModelMetadataExtension ####
-`ModelMetadataExtensions` provides extension methods for use with `Type` objects to retrieve metadata elements from member attributes. ([source](DataModel/ModelMetadataExtension.cs))
 ###
 
 ---
 
 ### DataModel.Annotations
-Provides helper methods for working with `System.ComponentModel.DataAnnotations`.
+Provides attributes used for describing objects and properties, as well as helper methods for working with `System.ComponentModel.DataAnnotations`.
 
+### Examples
 #### NounAttribute ####
 `NounAttribute` describes the singular and plural forms and articles of a noun. ([source](DataModel/Annotations/NounAttribute.cs))
 
@@ -48,15 +32,15 @@ Provides helper methods for working with `System.ComponentModel.DataAnnotations`
 ---
 
 ### DataModel.Expressions 
-Supports generation of queries dynamically.
+Supports generation of query expressions based on attributes applied to class properties.
 
 #### IExpressionBuilder ####
-`IExpressionBuilder` provides generic methods used for building query expressions dynamically. ([source](DataModel/Expressions/IExpressionBuilder.cs))
+`IExpressionBuilder` provides generic methods used for building query expressions for properties decorated with `SearchableAttribute` and `DisplayAttribute`. ([source](DataModel/Expressions/IExpressionBuilder.cs))
 
 #### IQueryParameter ####
 `IQueryParameter` represents part of a search expression used to construct a valid left-hand side of an equation. ([source](DataModel/Expressions/IQueryParameter.cs))
 
 #### ISearchableMemberMetadata ####
-`ISearchableMemberMetadata` represents a class member for which dynamic build query expressions is supported. ([source](DataModel/Expressions/ISearchableMemberMetadata.cs))
+`ISearchableMemberMetadata` represents a class member for which query expressions can be built. ([source](DataModel/Expressions/ISearchableMemberMetadata.cs))
 
 ###
