@@ -23,7 +23,7 @@
       <PackageProjectUrl>https://github.com/Ichosys/Expressions</PackageProjectUrl>
 
       <GenerateDocumentationFile>true</GenerateDocumentationFile>
-      <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+      <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 
       <!-- Optional: Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
       <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -34,6 +34,9 @@
       <!-- Optional: Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
       <IncludeSymbols>true</IncludeSymbols>
       <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+      <Title>Ichosys.DataModel</Title>
+      <PackageReadmeFile>README.md</PackageReadmeFile>
+      <RepositoryUrl>https://github.com/Ichosys/DataModel</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -72,6 +75,10 @@
     <None Include="..\LICENSE.md">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
 
