@@ -1,5 +1,5 @@
 # Third-Party Library Credits #
-This project uses some libraries written by others. Credits for each referenced work are listed below.
+Ichosys.DataModel uses some libraries written by others. Credits for each referenced work are listed below.
 
 ---
 ### Ichosys.Extensions.Common ###
