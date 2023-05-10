@@ -5,7 +5,7 @@ Ichosys.DataModel uses some libraries written by others. Credits for each refere
 ### Ichosys.Extensions.Common ###
 https://github.com/Ichosys/Extensions.Common
 
-Ichosys.Extensions.Common version 1.4.0
+Ichosys.Extensions.Common version 1.5.0
 
 MIT License
 
