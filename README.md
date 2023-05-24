@@ -1,4 +1,4 @@
-# Ichosys.DataModel #
+# DataModel #
 This library contains classes and methods for applying metadata to objects, accessing metadata for presentation in user interfaces or for generating search expressions.
 
 Be sure to read the [guidelines for contributing](CONTRIBUTING.md) to this project.
